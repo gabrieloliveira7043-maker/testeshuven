@@ -56,10 +56,11 @@ body {
 .sidebar::-webkit-scrollbar { display: none; }
 .kanban-board { min-width: max-content; }
 .content::-webkit-scrollbar { display: none; }
-  /* Esconder scrollbar vertical global, manter só horizontal do kanban */
+  /* Esconder scrollbar vertical global mas manter scroll funcionando */
   body::-webkit-scrollbar { display: none; }
-  body { overflow-y: hidden; scrollbar-width: none; }
-  html::-webkit-scrollbar:vertical { display: none; }
+  body { scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar { display: none; }
+  html { scrollbar-width: none; -ms-overflow-style: none; }
 .content { scrollbar-width: none; -ms-overflow-style: none; }
 .crm-view::-webkit-scrollbar { display: none; }
 .crm-view { scrollbar-width: none; }
@@ -104,7 +105,7 @@ body {
 .btn-cfg:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-glow2); }
 
 /* Main */
-.main { margin-left: 220px; flex: 1; min-height: 100vh; overflow-x: hidden; overflow-y: hidden; }
+.main { margin-left: 220px; flex: 1; min-height: 100vh; }
 
 /* Topbar */
 .topbar {
@@ -376,7 +377,7 @@ tr:hover td { background: var(--surface2); }
   }
 
   /* CRM */
-  .crm-view { display: none; padding: 28px 32px; overflow-x: visible; overflow-y: hidden; box-sizing: border-box; max-width: 100%; }
+  .crm-view { display: none; padding: 28px 32px; overflow-x: visible; box-sizing: border-box; max-width: 100%; }
   .kanban-wrapper { overflow-x: scroll; margin: 0 -4px; padding: 0 4px 8px; scrollbar-width: thin; scrollbar-color: var(--border) var(--surface2); }
   .kanban-wrapper::-webkit-scrollbar { height: 6px; }
   .kanban-wrapper::-webkit-scrollbar-track { background: var(--surface2); border-radius: 3px; }
