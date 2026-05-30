@@ -376,8 +376,8 @@ tr:hover td { background: var(--surface2); }
   }
 
   /* CRM */
-  .crm-view { display: none; padding: 28px 32px; overflow-x: hidden; box-sizing: border-box; max-width: 100%; }
-  .kanban-wrapper { overflow-x: auto; margin: 0 -4px; padding: 0 4px 4px; scrollbar-width: thin; scrollbar-color: var(--border) var(--surface2); }
+  .crm-view { display: none; padding: 28px 32px; overflow-x: visible; box-sizing: border-box; max-width: 100%; }
+  .kanban-wrapper { overflow-x: scroll; margin: 0 -4px; padding: 0 4px 8px; scrollbar-width: thin; scrollbar-color: var(--border) var(--surface2); }
   .kanban-wrapper::-webkit-scrollbar { height: 6px; }
   .kanban-wrapper::-webkit-scrollbar-track { background: var(--surface2); border-radius: 3px; }
   .kanban-wrapper::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -406,7 +406,7 @@ tr:hover td { background: var(--surface2); }
   .kanban-board::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; transition: background .2s; }
   .kanban-board::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
 
-  .kanban-board { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; align-items: flex-start; scrollbar-width: thin; scrollbar-color: var(--border) var(--surface2); -webkit-overflow-scrolling: touch; }
+  .kanban-board { display: flex; gap: 14px; padding-bottom: 4px; align-items: flex-start; }
   .kanban-col {
     flex-shrink: 0; width: 240px;
     background: var(--surface); border: 1px solid var(--border);
@@ -676,7 +676,7 @@ tr:hover td { background: var(--surface2); }
     .btn-add-lead { flex-shrink: 0; white-space: nowrap; }
     .crm-client-select { flex-shrink: 0; min-width: 160px; }
     .crm-title { font-size: 16px; }
-    .crm-view { padding: 14px; overflow-x: hidden; box-sizing: border-box; }
+    .crm-view { padding: 14px; overflow-x: visible; box-sizing: border-box; }
 
     /* Card actions no mobile - wrap para não sair da tela */
     .card-actions { flex-wrap: wrap; gap: 4px; }
