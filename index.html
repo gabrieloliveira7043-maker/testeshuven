@@ -1852,6 +1852,14 @@ async function loadExtraClients() {
         CLINICA_ACTS.push(c.act);
       }
     });
+    // Repopular dropdown com clientes extras
+    if (isAdmin) {
+      const sel = document.getElementById('crm-client-select');
+      if (sel) {
+        sel.innerHTML = '<option value="all">Todos os clientes</option>' +
+          Object.entries(CLIENT_NAMES).map(([act, name]) => `<option value="${act}">${name}</option>`).join('');
+      }
+    }
     renderSidebar();
   } catch(e) { console.warn('loadExtraClients erro:', e); }
 }
@@ -4956,9 +4964,15 @@ async function saveLead() {
     plantao: document.getElementById('lead-plantao').value,
     valor: document.getElementById('lead-valor').value.trim(),
     redeSocial: document.getElementById('lead-rede-social').value,
+    origem: document.getElementById('lead-origem') ? document.getElementById('lead-origem').value.trim() : (existing ? existing.origem || '' : ''),
+    obs: document.getElementById('lead-obs') ? document.getElementById('lead-obs').value.trim() : (existing ? existing.obs || '' : ''),
+    motivo: document.getElementById('lead-motivo') ? document.getElementById('lead-motivo').value.trim() : (existing ? existing.motivo || '' : ''),
+    proximaAcao: document.getElementById('lead-proxima-acao') ? document.getElementById('lead-proxima-acao').value.trim() : (existing ? existing.proximaAcao || '' : ''),
+    proximaData: document.getElementById('lead-proxima-data') ? document.getElementById('lead-proxima-data').value : (existing ? existing.proximaData || '' : ''),
     stage: newStage,
     act, history,
     createdAt: existing ? existing.createdAt : new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
     _docId: existing ? (existing._docId || null) : null
   };
   if (_leadsCache) {
@@ -5269,6 +5283,14 @@ async function loadExtraClients() {
         CLINICA_ACTS.push(c.act);
       }
     });
+    // Repopular dropdown com clientes extras agora disponíveis
+    if (isAdmin) {
+      const sel = document.getElementById('crm-client-select');
+      if (sel) {
+        sel.innerHTML = '<option value="all">Todos os clientes</option>' +
+          Object.entries(CLIENT_NAMES).map(([act, name]) => `<option value="${act}">${name}</option>`).join('');
+      }
+    }
     // Re-rodar restoreSession se havia sessão salva de um cliente extra
     const session = getSession();
     if (session && !document.getElementById('login-overlay').style.display.includes('none')) {
