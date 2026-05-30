@@ -933,7 +933,7 @@ function openStagesModal() {
     item.dataset.stageid = s.id;
     const inp = document.createElement('input');
     inp.type = 'text';
-    inp.value = s.label;
+    inp.value = (s.label && !s.label.startsWith('col_') && !s.label.startsWith('stage_')) ? s.label : '';
     inp.placeholder = 'Nome da coluna';
     const del = document.createElement('button');
     del.className = 'btn-del-stage';
@@ -979,7 +979,8 @@ function saveStagesFromModal() {
   items.forEach((item, i) => {
     const inp = item.querySelector('input');
     const label = inp ? inp.value.trim() : '';
-    if (!label) return;
+    // Ignorar colunas sem label ou com label parecendo ID interno
+    if (!label || label.startsWith('col_') || label.startsWith('stage_')) return;
     // Preservar ID original se existir, senão gerar novo para colunas novas
     const existingId = item.dataset.stageid || item.dataset.stageId;
     const id = existingId || ('col_new_' + newIdx + '_' + Date.now());
@@ -4094,7 +4095,8 @@ function openStagesModal() {
     item.dataset.stageId = s.id; // preservar ID original
     const inp = document.createElement('input');
     inp.type = 'text';
-    inp.value = s.label;
+    // Se label parece ID interno, mostrar vazio para forçar preenchimento
+    inp.value = (s.label && !s.label.startsWith('col_') && !s.label.startsWith('stage_')) ? s.label : '';
     inp.placeholder = 'Nome da coluna';
     const del = document.createElement('button');
     del.className = 'btn-del-stage';
@@ -4139,7 +4141,8 @@ function saveStagesFromModal() {
   items.forEach((item, i) => {
     const inp = item.querySelector('input');
     const label = inp ? inp.value.trim() : '';
-    if (!label) return;
+    // Ignorar colunas sem label ou com label parecendo ID interno
+    if (!label || label.startsWith('col_') || label.startsWith('stage_')) return;
     // Preservar ID original se existir, senão gerar novo para colunas novas
     const existingId = item.dataset.stageid || item.dataset.stageId;
     const id = existingId || ('col_new_' + newIdx + '_' + Date.now());
