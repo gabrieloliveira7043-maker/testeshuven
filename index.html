@@ -5287,13 +5287,13 @@ async function loadExtraClients() {
           Object.entries(CLIENT_NAMES).map(([act, name]) => `<option value="${act}">${name}</option>`).join('');
       }
     }
-    // Re-rodar restoreSession se havia sessão salva de um cliente extra
+    // Re-rodar restoreSession para garantir que cliente extra seja reconhecido
     const session = getSession();
-    if (session && !document.getElementById('login-overlay').style.display.includes('none')) {
+    if (session) {
       restoreSession();
     } else {
       renderSidebar();
-      updateSidebarForUser(); // Atualiza mobile-client-select com novos clientes
+      updateSidebarForUser();
     }
   } catch(e) { console.warn('loadExtraClients erro:', e); }
 }
