@@ -507,6 +507,8 @@ tr:hover td { background: var(--surface2); }
   .move-stage-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 .card-origem { font-size: 10px; color: var(--accent2); margin-bottom: 3px; font-style: italic; }
 .card-rede { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
+  .card-valor { font-size: 12px; font-weight: 600; color: #34d399; margin: 4px 0 2px; }
+  .card-proxima { font-size: 11px; color: #fbbf24; margin-bottom: 2px; }
 
   /* Toast notifications */
   #toast-container {
@@ -1338,6 +1340,7 @@ function renderKanban() {
       cardHTML += `<div class="card-phone">${lead.phone || '—'}</div>`;
       cardHTML += `<div class="card-email">${lead.email || '—'}</div>`;
       if (lead.obs) cardHTML += `<div class="card-obs">💬 ${lead.obs}</div>`;
+      if (lead.valor) cardHTML += `<div class="card-valor">💰 R$ ${lead.valor}</div>`;
       if (lead.proximaAcao) cardHTML += `<div class="card-proxima">⏰ ${lead.proximaAcao}${lead.proximaData ? ' · ' + new Date(lead.proximaData + 'T12:00:00').toLocaleDateString('pt-BR') : ''}</div>`;
       if (lead.createdAt) cardHTML += `<div style="font-size:10px;color:var(--muted);margin-top:4px;">Entrada: ${new Date(lead.createdAt).toLocaleDateString('pt-BR')}</div>`;
       const waPhone = lead.phone ? lead.phone.replace(/\D/g,'') : '';
@@ -4776,6 +4779,7 @@ function renderKanban() {
       cardHTML += `<div class="card-phone">${lead.phone || '—'}</div>`;
       cardHTML += `<div class="card-email">${lead.email || '—'}</div>`;
       if (lead.obs) cardHTML += `<div class="card-obs">💬 ${lead.obs}</div>`;
+      if (lead.valor) cardHTML += `<div class="card-valor">💰 R$ ${lead.valor}</div>`;
       if (lead.proximaAcao) cardHTML += `<div class="card-proxima">⏰ ${lead.proximaAcao}${lead.proximaData ? ' · ' + new Date(lead.proximaData + 'T12:00:00').toLocaleDateString('pt-BR') : ''}</div>`;
       if (lead.createdAt) cardHTML += `<div style="font-size:10px;color:var(--muted);margin-top:4px;">Entrada: ${new Date(lead.createdAt).toLocaleDateString('pt-BR')}</div>`;
       const waPhone = lead.phone ? lead.phone.replace(/\D/g,'') : '';
