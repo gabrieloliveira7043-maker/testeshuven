@@ -3432,7 +3432,8 @@ function renderFunilEvolucao() {
 
   // Idêntico ao renderKanban
   const selE = document.getElementById('crm-client-select');
-  const filterActE = isAdmin ? (selE ? (selE.value === 'all' ? null : selE.value) : null) : crmClientFilter;
+  const fromSelE = selE && selE.value !== 'all' ? selE.value : null;
+  const filterActE = isAdmin ? (fromSelE || crmClientFilter) : crmClientFilter;
   let leads = getLeads();
   if (filterActE) leads = leads.filter(l => l.act === filterActE);
 
@@ -3444,33 +3445,24 @@ function renderFunilEvolucao() {
   stages.forEach(s => { counts[s.id] = 0; });
   leads.forEach(l => { if (counts[l.stage] !== undefined) counts[l.stage]++; });
 
+  const total = leads.length;
   const colors = ['#60a5fa','#fbbf24','#f87171','#a78bfa','#34d399','#fb923c','#e879f9','#4ade80','#f472b6'];
 
   container.innerHTML = stages.map((stage, i) => {
     const count = counts[stage.id] || 0;
-    const isFirst = i === 0;
-
-    // Primeira etapa = 100%, demais comparadas com a anterior
-    const prevCount = isFirst ? count : (counts[stages[i-1].id] || 0);
-    const pct = isFirst ? 100 : (prevCount > 0 ? Math.round((count / prevCount) * 100) : 0);
+    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
     const barWidth = Math.min(pct, 100);
     const color = colors[i % colors.length];
 
-    // Seta indicando queda ou manutenção
-    const arrow = isFirst ? '' : (pct < 100 ? ' ↓' : ' →');
-    const arrowColor = pct < 50 ? '#f87171' : pct < 80 ? '#fbbf24' : '#34d399';
-
     return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-      <div style="font-size:12px;color:${isFirst?'var(--text)':'var(--muted)'};min-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:${isFirst?'500':'400'};">${stage.label}</div>
+      <div style="font-size:12px;color:var(--text);min-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:400;">${stage.label}</div>
       <div style="flex:1;background:var(--surface2);border-radius:4px;height:20px;overflow:hidden;">
         <div style="height:100%;width:${barWidth}%;background:${color};border-radius:4px;transition:width 0.4s;display:flex;align-items:center;padding-left:6px;box-sizing:border-box;">
           ${pct > 5 ? `<span style="font-size:10px;color:#fff;font-weight:500;">${pct}%</span>` : ''}
         </div>
       </div>
-      <div style="font-size:12px;color:var(--text);min-width:100px;text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:4px;">
-        ${count}
-        <span style="color:var(--muted);">(${pct}%)</span>
-        ${!isFirst ? `<span style="color:${arrowColor};font-size:11px;">${arrow}</span>` : ''}
+      <div style="font-size:12px;color:var(--text);min-width:80px;text-align:right;">
+        ${count} <span style="color:var(--muted);">(${pct}%)</span>
       </div>
     </div>`;
   }).join('');
