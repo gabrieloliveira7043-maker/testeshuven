@@ -1182,6 +1182,10 @@ function renderKanban() {
   const filterAct = isAdmin ? (fromSel || crmClientFilter) : crmClientFilter;
   let leads = getLeads();
   if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  // Filtrar por período selecionado
+  leads = typeof filterLeadsByPeriodo === 'function' ? filterLeadsByPeriodo(leads) : leads;
+  // Popular select de período com meses disponíveis
+  populatePeriodoSelect(getLeads().filter(l => !filterAct || l.act === filterAct));
 
   const STAGES = getStages(filterAct || (activeClient ? activeClient.account : ''));
 
@@ -1405,6 +1409,7 @@ function openLeadModal() {
   document.getElementById('lead-motivo').value = '';
   document.getElementById('lead-proxima-acao').value = '';
   document.getElementById('lead-proxima-data').value = '';
+  if (document.getElementById('lead-chegada')) document.getElementById('lead-chegada').value = new Date().toISOString().slice(0,10);
   document.getElementById('modal-title').textContent = 'Novo lead';
   document.getElementById('field-plantao').style.display = clinica ? 'block' : 'none';
   document.getElementById('field-valor').style.display = 'block';
@@ -1436,6 +1441,10 @@ function editLead(id) {
   document.getElementById('lead-motivo').value = lead.motivo || '';
   document.getElementById('lead-proxima-acao').value = lead.proximaAcao || '';
   document.getElementById('lead-proxima-data').value = lead.proximaData || '';
+  if (document.getElementById('lead-chegada')) {
+    const chegada = lead.createdAt ? new Date(lead.createdAt).toISOString().slice(0,10) : '';
+    document.getElementById('lead-chegada').value = chegada;
+  }
   document.getElementById('field-plantao').style.display = clinica ? 'block' : 'none';
   document.getElementById('field-valor').style.display = 'block';
   document.getElementById('field-motivo-perda').style.display = (lead.stage === 'perdido' || lead.stage === 'ncompareceu') ? 'block' : 'none';
@@ -1484,7 +1493,11 @@ async function saveLead() {
     proximaData: document.getElementById('lead-proxima-data').value,
     stage: newStage,
     act, history,
-    createdAt: existing ? existing.createdAt : new Date().toISOString(),
+    createdAt: (() => {
+      const chegadaEl = document.getElementById('lead-chegada');
+      if (chegadaEl && chegadaEl.value) return new Date(chegadaEl.value + 'T12:00:00').toISOString();
+      return existing ? existing.createdAt : new Date().toISOString();
+    })(),
     updatedAt: new Date().toISOString(),
     _docId: existing ? (existing._docId || null) : null
   };
@@ -2511,6 +2524,8 @@ function onCrmClientChange() {
           <select class="crm-client-select" id="crm-client-select" onchange="onCrmClientChange()" style="display:none;">
             <option value="all">Todos os clientes</option>
           </select>
+          <select id="crm-periodo" class="btn-manage-stages" style="margin-right:8px; cursor:pointer; padding:6px 10px;" onchange="onPeriodoChange()" title="Filtrar por período">
+          </select>
           <button class="btn-manage-stages" onclick="openStagesModal()" style="margin-right:8px;">⚙ Colunas</button>
           <button class="btn-manage-stages" id="btn-cfg-campos" onclick="openFieldsModal()" style="margin-right:8px; display:none;">⚙ Campos</button>
           <button class="btn-manage-stages" id="btn-limpar-crm" onclick="limparCrmCliente()" style="margin-right:8px; display:none; color:var(--red); border-color:rgba(248,113,113,0.3);" title="Limpar todos os leads deste cliente">🗑 Limpar CRM</button>
@@ -2625,6 +2640,10 @@ function onCrmClientChange() {
         <div class="modal-field" id="field-proxima-data">
           <label class="modal-label">Data da próxima ação</label>
           <input type="date" class="modal-input" id="lead-proxima-data">
+        </div>
+        <div class="modal-field" id="field-chegada">
+          <label class="modal-label">Chegada do lead</label>
+          <input type="date" class="modal-input" id="lead-chegada">
         </div>
         <input type="hidden" id="lead-id">
         <div class="modal-footer">
@@ -4582,6 +4601,48 @@ window.saveFieldsConfig = saveFieldsConfig;
 
 
 // ===== TOAST SYSTEM =====
+
+// ===== FILTRO DE PERÍODO =====
+let _periodoFiltro = 'todos'; // 'todos' ou 'YYYY-MM'
+
+function populatePeriodoSelect(leads) {
+  const sel = document.getElementById('crm-periodo');
+  if (!sel) return;
+  // Coletar meses únicos dos leads
+  const meses = new Set();
+  leads.forEach(l => {
+    const d = l.createdAt ? new Date(l.createdAt) : null;
+    if (d && !isNaN(d)) {
+      meses.add(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'));
+    }
+  });
+  const sorted = [...meses].sort().reverse();
+  const current = _periodoFiltro;
+  sel.innerHTML = '<option value="todos">Todos os períodos</option>' +
+    sorted.map(m => {
+      const [y, mo] = m.split('-');
+      const nome = new Date(y, mo-1, 1).toLocaleDateString('pt-BR', {month:'long', year:'numeric'});
+      return `<option value="${m}" ${m === current ? 'selected' : ''}>${nome.charAt(0).toUpperCase() + nome.slice(1)}</option>`;
+    }).join('');
+}
+
+function onPeriodoChange() {
+  const sel = document.getElementById('crm-periodo');
+  _periodoFiltro = sel ? sel.value : 'todos';
+  renderKanban(); renderFunilChart(); renderFunilEvolucao();
+}
+
+function filterLeadsByPeriodo(leads) {
+  if (!_periodoFiltro || _periodoFiltro === 'todos') return leads;
+  const [y, m] = _periodoFiltro.split('-').map(Number);
+  return leads.filter(l => {
+    const d = l.createdAt ? new Date(l.createdAt) : null;
+    return d && d.getFullYear() === y && d.getMonth()+1 === m;
+  });
+}
+
+window.onPeriodoChange = onPeriodoChange;
+
 function showToast(msg, type = 'info', duration = 3500) {
   const container = document.getElementById('toast-container');
   if (!container) { alert(msg); return; }
@@ -4635,6 +4696,10 @@ function renderKanban() {
   const filterAct = isAdmin ? (fromSel || crmClientFilter) : crmClientFilter;
   let leads = getLeads();
   if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  // Filtrar por período selecionado
+  leads = typeof filterLeadsByPeriodo === 'function' ? filterLeadsByPeriodo(leads) : leads;
+  // Popular select de período com meses disponíveis
+  populatePeriodoSelect(getLeads().filter(l => !filterAct || l.act === filterAct));
 
   const STAGES = getStages(filterAct || (activeClient ? activeClient.account : ''));
 
@@ -4975,7 +5040,11 @@ async function saveLead() {
     proximaData: document.getElementById('lead-proxima-data') ? document.getElementById('lead-proxima-data').value : (existing ? existing.proximaData || '' : ''),
     stage: newStage,
     act, history,
-    createdAt: existing ? existing.createdAt : new Date().toISOString(),
+    createdAt: (() => {
+      const chegadaEl = document.getElementById('lead-chegada');
+      if (chegadaEl && chegadaEl.value) return new Date(chegadaEl.value + 'T12:00:00').toISOString();
+      return existing ? existing.createdAt : new Date().toISOString();
+    })(),
     updatedAt: new Date().toISOString(),
     _docId: existing ? (existing._docId || null) : null
   };
