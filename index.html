@@ -378,11 +378,12 @@ tr:hover td { background: var(--surface2); }
 
   /* CRM */
   .crm-view { display: none; padding: 28px 32px; overflow-x: visible; box-sizing: border-box; max-width: 100%; }
-  .kanban-wrapper { overflow-x: scroll; margin: 0 -4px; padding: 0 4px 8px; scrollbar-width: thin; scrollbar-color: var(--border) var(--surface2); }
-  .kanban-wrapper::-webkit-scrollbar { height: 6px; }
-  .kanban-wrapper::-webkit-scrollbar-track { background: var(--surface2); border-radius: 3px; }
-  .kanban-wrapper::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-  .kanban-wrapper::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
+  .kanban-wrapper { overflow-x: scroll; margin: 0 -4px; padding: 0 4px 8px; scrollbar-width: auto; scrollbar-color: #4f46e5 #1e1b3a; }
+  .kanban-wrapper::-webkit-scrollbar { height: 10px; display: block; }
+  .kanban-wrapper::-webkit-scrollbar-track { background: #1e1b3a; border-radius: 5px; }
+  .kanban-wrapper::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 5px; cursor: grab; min-width: 40px; }
+  .kanban-wrapper::-webkit-scrollbar-thumb:hover { background: #6d64f7; }
+  .kanban-wrapper::-webkit-scrollbar-thumb:active { background: #7c6dfa; cursor: grabbing; }
   .crm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
   .crm-title { font-size: 18px; font-weight: 600; color: var(--text); }
   .crm-actions { display: flex; gap: 8px; align-items: center; }
@@ -4939,6 +4940,40 @@ function filtrarColuna(stageId, text) {
   }
 }
 window.filtrarColuna = filtrarColuna;
+
+// ===== DRAG TO SCROLL no kanban =====
+document.addEventListener('DOMContentLoaded', () => {
+  function initKanbanScroll() {
+    const wrapper = document.querySelector('.kanban-wrapper');
+    if (!wrapper) return;
+    let isDown = false, startX, scrollLeft;
+    wrapper.addEventListener('mousedown', e => {
+      // Só ativa drag se clicar fora de um card ou botão
+      if (e.target.closest('.kanban-card') || e.target.closest('button') || e.target.closest('input') || e.target.closest('select')) return;
+      isDown = true;
+      wrapper.style.cursor = 'grabbing';
+      startX = e.pageX - wrapper.offsetLeft;
+      scrollLeft = wrapper.scrollLeft;
+    });
+    wrapper.addEventListener('mouseleave', () => { isDown = false; wrapper.style.cursor = ''; });
+    wrapper.addEventListener('mouseup', () => { isDown = false; wrapper.style.cursor = ''; });
+    wrapper.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - wrapper.offsetLeft;
+      wrapper.scrollLeft = scrollLeft - (x - startX);
+    });
+  }
+  initKanbanScroll();
+  // Re-inicializar após renderKanban (o wrapper pode ser recriado)
+  const origRender = window.renderKanban;
+  if (origRender) {
+    window.renderKanban = function() {
+      origRender.apply(this, arguments);
+      setTimeout(initKanbanScroll, 100);
+    };
+  }
+});
 
 function onDragStart(e) {
   dragCard = e.currentTarget.dataset.id;
