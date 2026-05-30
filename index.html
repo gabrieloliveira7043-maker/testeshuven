@@ -852,7 +852,8 @@ function renderContatos() {
 
   const STAGES = typeof getStages === 'function' ? getStages(filterAct || '') : [];
   list.innerHTML = leads.map(lead => {
-    const stageLabel = STAGES.find(s => s.id === lead.stage)?.label || lead.stage || '';
+    const leadStages = typeof getStages === 'function' ? getStages(lead.act || filterAct || '') : STAGES;
+    const stageLabel = leadStages.find(s => s.id === lead.stage)?.label || STAGES.find(s => s.id === lead.stage)?.label || lead.stage || '';
     const color = stageColor2(lead.stage);
     const ini = initials(lead.name);
     const waPhone = lead.phone ? lead.phone.replace(/\D/g,'') : '';
@@ -4235,9 +4236,16 @@ function renderContatos() {
   }
   if (empty) empty.style.display = 'none';
 
+  // Construir mapa de stages incluindo custom stages de todos os clientes
   const STAGE_LABELS = {};
   const allStages = [...(typeof STAGES_DEFAULT !== 'undefined' ? STAGES_DEFAULT : []), ...(typeof STAGES_CLINICA !== 'undefined' ? STAGES_CLINICA : [])];
   allStages.forEach(s => STAGE_LABELS[s.id] = s.label);
+  // Adicionar custom stages de todos os clientes presentes nos leads
+  const actsPresentes = [...new Set(filtered.map(l => l.act).filter(Boolean))];
+  actsPresentes.forEach(act => {
+    const stages = getStages(act);
+    stages.forEach(s => { if (!STAGE_LABELS[s.id]) STAGE_LABELS[s.id] = s.label; });
+  });
 
   const STAGE_COLORS = {
     'novo':        {bg:'rgba(96,165,250,0.15)',color:'#60a5fa'},
