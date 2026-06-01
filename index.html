@@ -407,6 +407,8 @@ tr:hover td { background: var(--surface2); }
   .crm-board-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; border: 2px solid var(--surface2); }
   .crm-board-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
   .kanban-board { display: flex; gap: 14px; overflow-x: visible; min-width: max-content; padding-bottom: 8px; align-items: flex-start; -webkit-overflow-scrolling: touch; }
+  .crm-board-scroll.force-horizontal { overflow-x: scroll; }
+  .crm-board-scroll.force-horizontal .kanban-board { min-width: max(1280px, 100%); }
   .kanban-col {
     flex-shrink: 0; width: 240px;
     background: var(--surface); border: 1px solid var(--border);
@@ -1227,6 +1229,8 @@ function renderKanban() {
   }
 
   const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  if (boardScroll) boardScroll.classList.toggle('force-horizontal', isArteAzulejoClient(filterAct || (activeClient ? activeClient.account : '')));
   board.innerHTML = '';
   buildCrmChart(leads, STAGES);
 
@@ -4701,6 +4705,8 @@ function renderKanban() {
   }
 
   const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  if (boardScroll) boardScroll.classList.toggle('force-horizontal', isArteAzulejoClient(filterAct || (activeClient ? activeClient.account : '')));
   board.innerHTML = '';
 
   // Calcular faturamento: soma todos os leads em fechou/fechado com valor
