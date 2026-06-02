@@ -606,11 +606,11 @@ tr:hover td { background: var(--surface2); }
   }
   .confirm-btn-cancel:hover { border-color: var(--text); color: var(--text); }
   .confirm-btn-ok {
-    background: #f87171; border: none; color: #fff;
+    background: rgba(239, 68, 68, 0.16); border: 1px solid rgba(248, 113, 113, 0.48); color: #ff8a8a;
     border-radius: 8px; padding: 8px 20px; font-size: 13px;
-    cursor: pointer; font-weight: 600; font-family: inherit;
+    cursor: pointer; font-weight: 700; font-family: inherit;
   }
-  .confirm-btn-ok:hover { background: #ef4444; }
+  .confirm-btn-ok:hover { background: rgba(239, 68, 68, 0.28); border-color: #f87171; color: #fff; }
   .confirm-btn-ok.safe { background: var(--accent2); }
   .confirm-btn-ok.safe:hover { opacity: .85; }
   .col-search-wrap { padding: 8px 10px 4px; }
@@ -2238,7 +2238,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function doLogout() {
-  if (!await showConfirm('Você será desconectado do sistema.', 'Sair', 'Sair', false)) return;
+  if (!await showConfirm('Você será desconectado do sistema.', 'Sair', 'Sair', true)) return;
   clearSession();
   if (window._fb) await window._fb.logoutUser();
   location.reload();
@@ -2680,7 +2680,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function doLogout() {
-  if (!await showConfirm('Você será desconectado do sistema.', 'Sair', 'Sair', false)) return;
+  if (!await showConfirm('Você será desconectado do sistema.', 'Sair', 'Sair', true)) return;
   clearSession();
   if (window._fb) await window._fb.logoutUser();
   location.reload();
@@ -6571,7 +6571,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function doLogout() {
-  if (!await showConfirm('Você será desconectado do sistema.', 'Sair', 'Sair', false)) return;
+  if (!await showConfirm('Você será desconectado do sistema.', 'Sair', 'Sair', true)) return;
   clearSession();
   if (window._fb) await window._fb.logoutUser();
   location.reload();
@@ -6890,6 +6890,7 @@ function onCrmClientChange() {
 </script>
 </body>
 </html>
+
 
 
 
