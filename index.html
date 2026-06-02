@@ -626,12 +626,12 @@ tr:hover td { background: var(--surface2); }
       padding: 8px 0 12px;
     }
     .mobile-nav-item {
-      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
-      cursor: pointer; color: var(--muted2); font-size: 10px; font-weight: 500;
+      flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 2px;
+      cursor: pointer; color: var(--muted2); font-size: 9px; font-weight: 500;
       padding: 4px 0; transition: color 0.15s;
     }
     .mobile-nav-item.active { color: var(--accent2); }
-    .mobile-nav-item svg { flex-shrink: 0; }
+    .mobile-nav-item svg { flex-shrink: 0; width: 19px; height: 19px; }
 
     /* Mobile header */
     .mobile-header {
@@ -669,6 +669,20 @@ tr:hover td { background: var(--surface2); }
     /* Table scroll */
     .table-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     table { min-width: 680px; font-size: 12px; }
+    .campaigns-table-card { overflow: visible; border: 0; background: transparent; }
+    .campaigns-table { display: block; width: 100%; min-width: 0; }
+    .campaigns-table thead { display: none; }
+    .campaigns-table tbody { display: block; }
+    .campaigns-table tbody tr { display: block; margin-bottom: 12px; padding: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+    .campaigns-table tbody td { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--border); white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.35; text-align: right; }
+    .campaigns-table tbody td:last-child { border-bottom: 0; }
+    .campaigns-table tbody td::before { content: attr(data-label); flex: 0 0 42%; color: var(--muted); font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: left; }
+    .campaigns-table tbody td.name-cell { display: block; text-align: left; font-size: 14px; font-weight: 700; padding-bottom: 10px; }
+    .campaigns-table tbody td.name-cell::before { display: block; margin-bottom: 5px; }
+    .campaigns-table tbody td:not(.name-cell) > * { margin-left: auto; }
+    .campaigns-table tbody td.empty-state { display: block; text-align: center; }
+    .campaigns-table tbody td.empty-state::before { content: none; }
+    .hide-leads-cols .campaigns-table .col-cpl, .hide-leads-cols .campaigns-table .col-leads, .hide-leads-cols2 .campaigns-table .col-cpl, .hide-leads-cols2 .campaigns-table .col-leads, .hide-conv-cols .campaigns-table .col-conv, .hide-conv-cols .campaigns-table .col-cpconv { display: none; }
 
     /* Chart */
     .table-card canvas { height: 180px !important; }
@@ -2517,6 +2531,10 @@ function onCrmClientChange() {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     Conta
   </div>
+  <div class="mobile-nav-item theme-toggle-mobile" id="mnav-theme" onclick="toggleHuvenTheme()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+    Tema <span id="huven-theme-label-mobile">Claro</span>
+  </div>
   <div class="mobile-nav-item" id="mnav-sair" onclick="doLogout()" style="color:var(--red);">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
     Sair
@@ -2736,8 +2754,8 @@ function onCrmClientChange() {
         </div>
 
         <div class="section-label">Campanhas no período</div>
-        <div class="table-card">
-          <table>
+        <div class="table-card campaigns-table-card">
+          <table class="campaigns-table">
             <thead>
               <tr id="table-header-row">
                 <th style="width:24%">Campanha</th>
@@ -3398,16 +3416,16 @@ async function loadData() {
       const cpConvRow = convRow ? spend / convRow : 0;
       const isActive = (statusMap[d.campaign_id] || '').toUpperCase() === 'ACTIVE';
       return `<tr>
-        <td class="name-cell" title="${d.campaign_name}">${d.campaign_name}</td>
-        <td><span class="status-pill ${isActive ? 'active' : 'paused'}"><span class="status-dot"></span>${isActive ? 'Ativa' : 'Pausada'}</span></td>
-        <td>${fmtBRL(spend)}</td>
-        <td>${fmt(d.ctr || 0)}%</td>
-        <td>${fmtBRL(d.cpm || 0)}</td>
-        <td>${fmt(d.frequency || 0)}</td>
-        <td class="col-cpl">${leads ? fmtBRL(cplRow) : '—'}</td>
-        <td class="col-leads">${leads || '—'}</td>
-        <td class="col-conv">${convRow || '—'}</td>
-        <td class="col-cpconv">${convRow ? fmtBRL(cpConvRow) : '—'}</td>
+        <td class="name-cell" data-label="Campanha" title="${d.campaign_name}">${d.campaign_name}</td>
+        <td data-label="Status"><span class="status-pill ${isActive ? 'active' : 'paused'}"><span class="status-dot"></span>${isActive ? 'Ativa' : 'Pausada'}</span></td>
+        <td data-label="Gasto">${fmtBRL(spend)}</td>
+        <td data-label="CTR">${fmt(d.ctr || 0)}%</td>
+        <td data-label="CPM">${fmtBRL(d.cpm || 0)}</td>
+        <td data-label="Freq.">${fmt(d.frequency || 0)}</td>
+        <td data-label="CPL" class="col-cpl">${leads ? fmtBRL(cplRow) : '—'}</td>
+        <td data-label="Leads" class="col-leads">${leads || '—'}</td>
+        <td data-label="Conv. inic." class="col-conv">${convRow || '—'}</td>
+        <td data-label="Custo/conv." class="col-cpconv">${convRow ? fmtBRL(cpConvRow) : '—'}</td>
       </tr>`;
     }).join('');
 
@@ -5038,8 +5056,11 @@ function applyHuvenTheme(theme) {
   const next = theme === 'light' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   try { localStorage.setItem('huven_theme', next); } catch(e) {}
+  const nextLabel = next === 'light' ? 'Escuro' : 'Claro';
   const label = document.getElementById('huven-theme-label');
-  if (label) label.textContent = next === 'light' ? 'Escuro' : 'Claro';
+  if (label) label.textContent = nextLabel;
+  const mobileLabel = document.getElementById('huven-theme-label-mobile');
+  if (mobileLabel) mobileLabel.textContent = nextLabel;
 }
 function toggleHuvenTheme() {
   const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
