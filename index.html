@@ -1236,6 +1236,25 @@ const STAGE_COLORS = ['col-novo','col-contato','col-proposta','col-fechado','col
 function stageColor(idx) { return STAGE_COLORS[idx % STAGE_COLORS.length]; }
 
 const CRM_KEY = 'catapulta_crm_v1';
+function normalizeImportedLeadFields(lead) {
+  if (!lead || typeof lead !== 'object') return lead;
+  const normalized = { ...lead };
+  normalized.obs = normalized.obs || normalized.observacoes || normalized.observacao || normalized['observações'] || '';
+  const socialRaw = String(normalized.redeSocial || normalized.rede_social || normalized.platform || normalized.plataforma || normalized.origem || '').trim();
+  const social = socialRaw.toLowerCase();
+  if (social.includes('insta') || social === 'ig') normalized.redeSocial = 'Instagram';
+  else if (social.includes('face') || social === 'fb' || social.includes('facebook') || social === 'meta') normalized.redeSocial = 'Facebook';
+  else if (social.includes('whats')) normalized.redeSocial = 'WhatsApp';
+  else if (social.includes('tiktok')) normalized.redeSocial = 'TikTok';
+  else if (social.includes('google')) normalized.redeSocial = 'Google';
+  else if (!normalized.redeSocial && socialRaw) normalized.redeSocial = socialRaw;
+  return normalized;
+}
+
+function normalizeImportedLeadsFields(leads) {
+  return Array.isArray(leads) ? leads.map(normalizeImportedLeadFields) : [];
+}
+
 let crmClientFilter = null;
 let dragCard = null;
 let dragCol = null;
@@ -1247,18 +1266,18 @@ async function getLeadsAsync() {
   if (window._fbReady) {
     try {
       const leads = await window._fb.getLeads();
-      _leadsCache = leads;
-      return leads;
+      _leadsCache = normalizeImportedLeadsFields(leads);
+      return _leadsCache;
     } catch(e) {
       console.warn('Firebase error, using cache', e);
-      return _leadsCache || [];
+      return normalizeImportedLeadsFields(_leadsCache || []);
     }
   }
-  return _leadsCache || [];
+  return normalizeImportedLeadsFields(_leadsCache || []);
 }
 
 function getLeads() {
-  return _leadsCache || [];
+  return normalizeImportedLeadsFields(_leadsCache || []);
 }
 
 async function saveLeadToDb(lead) {
@@ -1774,7 +1793,7 @@ function openLeadModal() {
 }
 
 function editLead(id) {
-  const lead = getLeads().find(l => l.id === id);
+  let lead = getLeads().find(l => l.id === id);
   if (!lead) return;
   const clinica = isClinicaClient(lead.act);
   document.getElementById('lead-id').value = lead.id;
@@ -1785,6 +1804,7 @@ function editLead(id) {
   document.getElementById('lead-plantao').value = lead.plantao || '';
   document.getElementById('lead-valor').value = lead.valor || '';
   document.getElementById('lead-origem').value = lead.origem || '';
+  lead = normalizeImportedLeadFields(lead);
   document.getElementById('lead-rede-social').value = lead.redeSocial || '';
   document.getElementById('lead-obs').value = lead.obs || '';
   document.getElementById('lead-motivo').value = lead.motivo || '';
@@ -2477,7 +2497,7 @@ function onCrmClientChange() {
   window._fb = {
     async getLeads() {
       const snap = await getDocs(collection(db, 'leads'));
-      return snap.docs.map(d => ({ ...d.data(), _docId: d.id }));
+      return snap.docs.map(d => normalizeImportedLeadFields({ ...d.data(), _docId: d.id }));
     },
     async saveLead(lead) {
       if (lead._docId) {
@@ -4921,6 +4941,25 @@ function saveStagesFromModal() {
 }
 
 const CRM_KEY = 'catapulta_crm_v1';
+function normalizeImportedLeadFields(lead) {
+  if (!lead || typeof lead !== 'object') return lead;
+  const normalized = { ...lead };
+  normalized.obs = normalized.obs || normalized.observacoes || normalized.observacao || normalized['observações'] || '';
+  const socialRaw = String(normalized.redeSocial || normalized.rede_social || normalized.platform || normalized.plataforma || normalized.origem || '').trim();
+  const social = socialRaw.toLowerCase();
+  if (social.includes('insta') || social === 'ig') normalized.redeSocial = 'Instagram';
+  else if (social.includes('face') || social === 'fb' || social.includes('facebook') || social === 'meta') normalized.redeSocial = 'Facebook';
+  else if (social.includes('whats')) normalized.redeSocial = 'WhatsApp';
+  else if (social.includes('tiktok')) normalized.redeSocial = 'TikTok';
+  else if (social.includes('google')) normalized.redeSocial = 'Google';
+  else if (!normalized.redeSocial && socialRaw) normalized.redeSocial = socialRaw;
+  return normalized;
+}
+
+function normalizeImportedLeadsFields(leads) {
+  return Array.isArray(leads) ? leads.map(normalizeImportedLeadFields) : [];
+}
+
 let crmClientFilter = null;
 let dragCard = null;
 let dragCol = null;
@@ -4932,18 +4971,18 @@ async function getLeadsAsync() {
   if (window._fbReady) {
     try {
       const leads = await window._fb.getLeads();
-      _leadsCache = leads;
-      return leads;
+      _leadsCache = normalizeImportedLeadsFields(leads);
+      return _leadsCache;
     } catch(e) {
       console.warn('Firebase error, using cache', e);
-      return _leadsCache || [];
+      return normalizeImportedLeadsFields(_leadsCache || []);
     }
   }
-  return _leadsCache || [];
+  return normalizeImportedLeadsFields(_leadsCache || []);
 }
 
 function getLeads() {
-  return _leadsCache || [];
+  return normalizeImportedLeadsFields(_leadsCache || []);
 }
 
 async function saveLeadToDb(lead) {
@@ -5868,7 +5907,7 @@ function openLeadModal() {
 }
 
 function editLead(id) {
-  const lead = getLeads().find(l => l.id === id);
+  let lead = getLeads().find(l => l.id === id);
   if (!lead) return;
   const clinica = isClinicaClient(lead.act);
   document.getElementById('lead-id').value = lead.id;
@@ -5878,6 +5917,7 @@ function editLead(id) {
   document.getElementById('lead-created-at').value = leadDateInputValue(lead);
   document.getElementById('lead-plantao').value = lead.plantao || '';
   document.getElementById('lead-valor').value = lead.valor || '';
+  lead = normalizeImportedLeadFields(lead);
   document.getElementById('lead-rede-social').value = lead.redeSocial || '';
   // Reset campos configuráveis para visível antes de aplicar config
   ['field-valor','field-origem','field-rede-social','field-obs','field-proxima-acao','field-proxima-data'].forEach(id => {
@@ -5898,6 +5938,7 @@ function editLead(id) {
   document.getElementById('modal-title').textContent = 'Editar lead';
   if (lead.act) applyFieldConfig(lead.act);
   // Restaurar valor do select rede social após applyFieldConfig sobrescrever opções
+  lead = normalizeImportedLeadFields(lead);
   document.getElementById('lead-rede-social').value = lead.redeSocial || '';
   document.getElementById('lead-modal').classList.add('open');
 }
@@ -6507,4 +6548,7 @@ function onCrmClientChange() {
 </script>
 </body>
 </html>
+
+
+
 
