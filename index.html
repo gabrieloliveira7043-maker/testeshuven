@@ -1240,7 +1240,8 @@ function normalizeImportedLeadFields(lead) {
   if (!lead || typeof lead !== 'object') return lead;
   const normalized = { ...lead };
   normalized.obs = normalized.obs || normalized.observacoes || normalized.observacao || normalized['observações'] || '';
-  const socialRaw = String(normalized.redeSocial || normalized.rede_social || normalized.platform || normalized.plataforma || normalized.origem || '').trim();
+  const rawSheet = normalized.sheet && normalized.sheet.raw ? normalized.sheet.raw : {};
+  const socialRaw = String(rawSheet.platform || rawSheet.plataforma || rawSheet.rede_social || normalized.platform || normalized.plataforma || normalized.rede_social || normalized.redeSocial || normalized.origem || '').trim();
   const social = socialRaw.toLowerCase();
   if (social.includes('insta') || social === 'ig') normalized.redeSocial = 'Instagram';
   else if (social.includes('face') || social === 'fb' || social.includes('facebook') || social === 'meta') normalized.redeSocial = 'Facebook';
@@ -4945,7 +4946,8 @@ function normalizeImportedLeadFields(lead) {
   if (!lead || typeof lead !== 'object') return lead;
   const normalized = { ...lead };
   normalized.obs = normalized.obs || normalized.observacoes || normalized.observacao || normalized['observações'] || '';
-  const socialRaw = String(normalized.redeSocial || normalized.rede_social || normalized.platform || normalized.plataforma || normalized.origem || '').trim();
+  const rawSheet = normalized.sheet && normalized.sheet.raw ? normalized.sheet.raw : {};
+  const socialRaw = String(rawSheet.platform || rawSheet.plataforma || rawSheet.rede_social || normalized.platform || normalized.plataforma || normalized.rede_social || normalized.redeSocial || normalized.origem || '').trim();
   const social = socialRaw.toLowerCase();
   if (social.includes('insta') || social === 'ig') normalized.redeSocial = 'Instagram';
   else if (social.includes('face') || social === 'fb' || social.includes('facebook') || social === 'meta') normalized.redeSocial = 'Facebook';
@@ -6552,6 +6554,7 @@ function onCrmClientChange() {
 </script>
 </body>
 </html>
+
 
 
 
