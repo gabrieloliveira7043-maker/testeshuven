@@ -396,6 +396,12 @@ tr:hover td { background: var(--surface2); }
     padding: 7px 12px; height: 36px; outline: none; font-family: 'Inter', sans-serif;
     display: none;
   }
+  .crm-month-select {
+    min-width: 160px;
+    background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: var(--r); color: var(--text); font-size: 13px;
+    padding: 7px 12px; height: 36px; outline: none; font-family: 'Inter', sans-serif;
+  }
   .crm-board-scroll {
     width: 100%; max-width: 100%; overflow-x: auto; overflow-y: visible;
     margin: 0 -2px 20px; padding: 0 2px 14px;
@@ -847,8 +853,8 @@ function stageColor2(stage) {
 function renderContatos() {
   const q = (document.getElementById('contatos-search')?.value || '').toLowerCase();
   const filterAct = typeof isAdmin !== 'undefined' && isAdmin ? (() => { const sel = document.getElementById('crm-client-select'); return sel && sel.value !== 'all' ? sel.value : null; })() : (typeof crmClientFilter !== 'undefined' ? crmClientFilter : null);
-  let leads = getLeads();
-  if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  let leads = getCrmBaseLeads(filterAct);
+  leads = filterLeadsByCrmMonth(leads);
   if (q) leads = leads.filter(l => (l.name||'').toLowerCase().includes(q) || (l.email||'').toLowerCase().includes(q) || (l.phone||'').includes(q));
   leads.sort((a,b) => (a.name||'').localeCompare(b.name||''));
 
@@ -1196,6 +1202,72 @@ function switchView(view) {
   }
 }
 
+function getCurrentMonthKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function getLeadMonthKey(lead) {
+  if (!lead || !lead.createdAt) return '';
+  const d = new Date(lead.createdAt);
+  if (isNaN(d.getTime())) return '';
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function formatCrmMonthLabel(monthKey) {
+  const [year, month] = String(monthKey || '').split('-').map(Number);
+  if (!year || !month) return monthKey || '';
+  const label = new Date(year, month - 1, 1).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+function leadDateInputValue(lead) {
+  if (!lead || !lead.createdAt) return new Date().toISOString().slice(0, 10);
+  const d = new Date(lead.createdAt);
+  return isNaN(d.getTime()) ? new Date().toISOString().slice(0, 10) : d.toISOString().slice(0, 10);
+}
+
+function createdAtFromDateInput(value, fallbackIso) {
+  if (value) return new Date(value + 'T12:00:00').toISOString();
+  return fallbackIso || new Date().toISOString();
+}
+
+function getCrmBaseLeads(filterAct) {
+  let leads = getCrmBaseLeads(filterAct);
+  leads = filterLeadsByCrmMonth(leads);
+  return leads;
+}
+
+function populateCrmMonthFilter(leads) {
+  const sel = document.getElementById('crm-month-filter');
+  if (!sel) return 'all';
+  const currentMonth = getCurrentMonthKey();
+  const previous = sel.dataset.ready === '1' ? (sel.value || currentMonth) : currentMonth;
+  const monthKeys = [...new Set((leads || []).map(getLeadMonthKey).filter(Boolean))];
+  if (!monthKeys.includes(currentMonth)) monthKeys.push(currentMonth);
+  monthKeys.sort().reverse();
+  sel.innerHTML = '<option value="all">Geral</option>' + monthKeys.map(key => {
+    const suffix = key === currentMonth ? ' (vigente)' : '';
+    return `<option value="${key}">${formatCrmMonthLabel(key)}${suffix}</option>`;
+  }).join('');
+  sel.value = [...monthKeys, 'all'].includes(previous) ? previous : currentMonth;
+  sel.dataset.ready = '1';
+  return sel.value;
+}
+
+function filterLeadsByCrmMonth(leads) {
+  const sel = document.getElementById('crm-month-filter');
+  const selected = sel ? sel.value : getCurrentMonthKey();
+  if (!selected || selected === 'all') return leads;
+  return (leads || []).filter(lead => getLeadMonthKey(lead) === selected);
+}
+
+function onCrmMonthChange() {
+  renderKanban();
+  if (typeof renderFunilChart === 'function') renderFunilChart();
+  if (typeof renderFunilEvolucao === 'function') renderFunilEvolucao();
+}
+window.onCrmMonthChange = onCrmMonthChange;
 function setupCrmForClient() {
   if (isAdmin) {
     const sel = document.getElementById('crm-client-select');
@@ -1212,8 +1284,9 @@ function renderKanban() {
   const sel = document.getElementById('crm-client-select');
   const fromSel = sel && sel.value !== 'all' ? sel.value : null;
   const filterAct = isAdmin ? (fromSel || crmClientFilter) : crmClientFilter;
-  let leads = getLeads();
-  if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  let leads = getCrmBaseLeads(filterAct);
+  populateCrmMonthFilter(leads);
+  leads = filterLeadsByCrmMonth(leads);
 
   const STAGES = getStages(filterAct || (activeClient ? activeClient.account : ''));
 
@@ -1430,6 +1503,7 @@ function openLeadModal() {
   document.getElementById('lead-name').value = '';
   document.getElementById('lead-phone').value = '';
   document.getElementById('lead-email').value = '';
+  document.getElementById('lead-created-at').value = new Date().toISOString().slice(0, 10);
   document.getElementById('lead-plantao').value = '';
   document.getElementById('lead-valor').value = '';
   document.getElementById('lead-stage').value = 'novo';
@@ -1462,6 +1536,7 @@ function editLead(id) {
   document.getElementById('lead-name').value = lead.name;
   document.getElementById('lead-phone').value = lead.phone || '';
   document.getElementById('lead-email').value = lead.email || '';
+  document.getElementById('lead-created-at').value = leadDateInputValue(lead);
   document.getElementById('lead-plantao').value = lead.plantao || '';
   document.getElementById('lead-valor').value = lead.valor || '';
   document.getElementById('lead-origem').value = lead.origem || '';
@@ -1518,7 +1593,7 @@ async function saveLead() {
     proximaData: document.getElementById('lead-proxima-data').value,
     stage: newStage,
     act, history,
-    createdAt: existing ? existing.createdAt : new Date().toISOString(),
+    createdAt: createdAtFromDateInput(document.getElementById('lead-created-at') ? document.getElementById('lead-created-at').value : '', existing ? existing.createdAt : null),
     updatedAt: new Date().toISOString(),
     _docId: existing ? (existing._docId || null) : null
   };
@@ -1764,8 +1839,8 @@ function switchCrmChart(type) {
   // rebuild with current data
   const sel = document.getElementById('crm-client-select');
   const filterAct = isAdmin ? (sel.value === 'all' ? null : sel.value) : crmClientFilter;
-  let leads = getLeads();
-  if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  let leads = getCrmBaseLeads(filterAct);
+  leads = filterLeadsByCrmMonth(leads);
   const STAGES = getStages(filterAct || (activeClient ? activeClient.account : ''));
   buildCrmChart(leads, STAGES);
 }
@@ -2545,6 +2620,9 @@ function onCrmClientChange() {
           <select class="crm-client-select" id="crm-client-select" onchange="onCrmClientChange()" style="display:none;">
             <option value="all">Todos os clientes</option>
           </select>
+          <select class="crm-month-select" id="crm-month-filter" onchange="onCrmMonthChange()" title="Filtrar leads por mês">
+            <option value="all">Geral</option>
+          </select>
           <button class="btn-manage-stages" onclick="openStagesModal()" style="margin-right:8px;">⚙ Colunas</button>
           <button class="btn-manage-stages" id="btn-cfg-campos" onclick="openFieldsModal()" style="margin-right:8px; display:none;">⚙ Campos</button>
           <button class="btn-manage-stages" id="btn-limpar-crm" onclick="limparCrmCliente()" style="margin-right:8px; display:none; color:var(--red); border-color:rgba(248,113,113,0.3);" title="Limpar todos os leads deste cliente">🗑 Limpar CRM</button>
@@ -2604,6 +2682,10 @@ function onCrmClientChange() {
         <div class="modal-field">
           <label class="modal-label">E-mail</label>
           <input type="email" class="modal-input" id="lead-email" placeholder="email@exemplo.com">
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">Data de criação do lead</label>
+          <input type="date" class="modal-input" id="lead-created-at">
         </div>
         <div class="modal-field">
           <label class="modal-label">Etapa</label>
@@ -3392,8 +3474,8 @@ function renderFunilChart() {
   // Idêntico ao renderKanban
   const selC = document.getElementById('crm-client-select');
   const filterAct = isAdmin ? (selC ? (selC.value === 'all' ? null : selC.value) : null) : crmClientFilter;
-  let leads = getLeads();
-  if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  let leads = getCrmBaseLeads(filterAct);
+  leads = filterLeadsByCrmMonth(leads);
 
   document.getElementById('funil-chart-container').style.display = 'block';
 
@@ -3470,8 +3552,8 @@ function renderFunilEvolucao() {
   const selE = document.getElementById('crm-client-select');
   const fromSelE = selE && selE.value !== 'all' ? selE.value : null;
   const filterActE = isAdmin ? (fromSelE || crmClientFilter) : crmClientFilter;
-  let leads = getLeads();
-  if (filterActE) leads = leads.filter(l => l.act === filterActE);
+  let leads = getCrmBaseLeads(filterActE);
+  leads = filterLeadsByCrmMonth(leads);
 
   if(wrapper) wrapper.style.display = 'block';
 
@@ -4688,8 +4770,9 @@ function renderKanban() {
   const sel = document.getElementById('crm-client-select');
   const fromSel = sel && sel.value !== 'all' ? sel.value : null;
   const filterAct = isAdmin ? (fromSel || crmClientFilter) : crmClientFilter;
-  let leads = getLeads();
-  if (filterAct) leads = leads.filter(l => l.act === filterAct);
+  let leads = getCrmBaseLeads(filterAct);
+  populateCrmMonthFilter(leads);
+  leads = filterLeadsByCrmMonth(leads);
 
   const STAGES = getStages(filterAct || (activeClient ? activeClient.account : ''));
 
@@ -4937,6 +5020,7 @@ function openLeadModal() {
   document.getElementById('lead-name').value = '';
   document.getElementById('lead-phone').value = '';
   document.getElementById('lead-email').value = '';
+  document.getElementById('lead-created-at').value = new Date().toISOString().slice(0, 10);
   document.getElementById('lead-plantao').value = '';
   document.getElementById('lead-valor').value = '';
   document.getElementById('lead-rede-social').value = '';
@@ -4969,6 +5053,7 @@ function editLead(id) {
   document.getElementById('lead-name').value = lead.name;
   document.getElementById('lead-phone').value = lead.phone || '';
   document.getElementById('lead-email').value = lead.email || '';
+  document.getElementById('lead-created-at').value = leadDateInputValue(lead);
   document.getElementById('lead-plantao').value = lead.plantao || '';
   document.getElementById('lead-valor').value = lead.valor || '';
   document.getElementById('lead-rede-social').value = lead.redeSocial || '';
@@ -5032,7 +5117,7 @@ async function saveLead() {
     proximaData: document.getElementById('lead-proxima-data') ? document.getElementById('lead-proxima-data').value : (existing ? existing.proximaData || '' : ''),
     stage: newStage,
     act, history,
-    createdAt: existing ? existing.createdAt : new Date().toISOString(),
+    createdAt: createdAtFromDateInput(document.getElementById('lead-created-at') ? document.getElementById('lead-created-at').value : '', existing ? existing.createdAt : null),
     updatedAt: new Date().toISOString(),
     _docId: existing ? (existing._docId || null) : null
   };
