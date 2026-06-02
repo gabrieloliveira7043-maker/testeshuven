@@ -43,7 +43,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-.layout { display: flex; min-height: 100vh; }
+.layout { display: flex; min-height: 100vh; width: 100%; max-width: 100vw; overflow-x: hidden; }
 
 /* Sidebar */
 .sidebar {
@@ -105,7 +105,7 @@ html { scrollbar-width: none; -ms-overflow-style: none; }
 .btn-cfg:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-glow2); }
 
 /* Main */
-.main { margin-left: 220px; flex: 1; min-height: 100vh; }
+.main { margin-left: 220px; flex: 1; min-width: 0; width: calc(100vw - 220px); max-width: calc(100vw - 220px); min-height: 100vh; overflow-x: hidden; }
 
 /* Topbar */
 .topbar {
@@ -137,7 +137,7 @@ input[type="date"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px va
 .btn-update:active { transform: translateY(0); }
 
 /* Content */
-.content { padding: 28px 32px; overflow-x: hidden; box-sizing: border-box; }
+.content { padding: 28px 32px; overflow-x: hidden; box-sizing: border-box; max-width: 100%; }
 .error-box {
   background: var(--red-dim); border: 1px solid rgba(248,113,113,0.2);
   border-radius: var(--r2); padding: 14px 18px;
@@ -377,7 +377,7 @@ tr:hover td { background: var(--surface2); }
   }
 
   /* CRM */
-  .crm-view { display: none; padding: 28px 32px; overflow-x: hidden; box-sizing: border-box; max-width: 100%; }
+  .crm-view { display: none; padding: 28px 32px; overflow-x: hidden; box-sizing: border-box; width: 100%; max-width: 100%; min-width: 0; }
   .crm-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
   .crm-title { font-size: 18px; font-weight: 600; color: var(--text); }
   .crm-actions { display: flex; gap: 8px; align-items: center; }
@@ -403,18 +403,30 @@ tr:hover td { background: var(--surface2); }
     padding: 7px 12px; height: 36px; outline: none; font-family: 'Inter', sans-serif;
   }
   .crm-board-scroll {
-    width: 100%; max-width: 100%; overflow-x: auto; overflow-y: visible;
-    margin: 0 -2px 20px; padding: 0 2px 14px;
-    scrollbar-width: thin; scrollbar-color: var(--accent) var(--surface2);
-    -webkit-overflow-scrolling: touch;
+    display: block;
+    width: 100%; max-width: 100%; min-width: 0;
+    overflow-x: auto; overflow-y: visible;
+    margin: 0 0 8px; padding: 0 0 8px; box-sizing: border-box;
+    scrollbar-width: none; -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain;
+    contain: layout paint;
   }
-  .crm-board-scroll::-webkit-scrollbar { height: 12px; display: block; }
+  .crm-board-scroll::-webkit-scrollbar { display: none; }
   .crm-board-scroll::-webkit-scrollbar-track { background: var(--surface2); border-radius: 999px; }
   .crm-board-scroll::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; border: 2px solid var(--surface2); }
   .crm-board-scroll::-webkit-scrollbar-thumb:hover { background: var(--accent2); }
-  .kanban-board { display: flex; gap: 14px; overflow-x: visible; min-width: max-content; padding-bottom: 8px; align-items: flex-start; -webkit-overflow-scrolling: touch; }
+  .kanban-board { display: flex; gap: 14px; overflow: visible; width: max-content; min-width: max-content; max-width: none; padding-bottom: 8px; align-items: flex-start; -webkit-overflow-scrolling: touch; }
+  .crm-scrollbar-wrap { display: none; width: 100%; margin: 0 0 24px; padding: 0 2px; box-sizing: border-box; }
+  .crm-scrollbar-wrap.active { display: block; }
+  .crm-scrollbar-range { width: 100%; height: 16px; margin: 0; display: block; appearance: none; -webkit-appearance: none; background: transparent; cursor: grab; }
+  .crm-scrollbar-range:active { cursor: grabbing; }
+  .crm-scrollbar-range::-webkit-slider-runnable-track { height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--gold), var(--gold)) 0/var(--scroll-progress, 0%) 100% no-repeat, var(--surface2); border: 1px solid var(--border); }
+  .crm-scrollbar-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 14px; margin-top: -4px; border-radius: 999px; background: var(--gold); border: 2px solid var(--surface); box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
+  .crm-scrollbar-range::-moz-range-track { height: 8px; border-radius: 999px; background: var(--surface2); border: 1px solid var(--border); }
+  .crm-scrollbar-range::-moz-range-progress { height: 8px; border-radius: 999px; background: var(--gold); }
+  .crm-scrollbar-range::-moz-range-thumb { width: 22px; height: 14px; border-radius: 999px; background: var(--gold); border: 2px solid var(--surface); box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
   .crm-board-scroll.force-horizontal { overflow-x: scroll; }
-  .crm-board-scroll.force-horizontal .kanban-board { min-width: max(1280px, 100%); }
+  .crm-board-scroll.force-horizontal .kanban-board { width: max-content; min-width: max-content; max-width: none; }
   .kanban-col {
     flex-shrink: 0; width: 240px;
     background: var(--surface); border: 1px solid var(--border);
@@ -617,7 +629,7 @@ tr:hover td { background: var(--surface2); }
   @media (max-width: 768px) {
     .layout { flex-direction: column; }
     .sidebar { display: none; }
-    .main { margin-left: 0; padding-bottom: 70px; }
+    .main { margin-left: 0; width: 100%; max-width: 100%; padding-bottom: 70px; }
 
     /* Bottom nav */
     .mobile-nav {
@@ -796,9 +808,10 @@ html[data-theme="light"] .login-overlay { background: var(--paper); }
 @media (max-width: 768px) {
   html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .crm-board-scroll { overflow-x: visible; overflow-y: visible; margin: 0 0 18px; padding: 0; }
+  .crm-scrollbar-wrap { display: none !important; }
   .crm-board-scroll.force-horizontal { overflow-x: visible; }
-  .crm-board-scroll.force-horizontal .kanban-board { min-width: 100%; }
-  .kanban-board { min-width: 100% !important; width: 100%; gap: 16px; }
+  .crm-board-scroll.force-horizontal .kanban-board { min-width: 100%; width: 100%; }
+  .kanban-board { display: flex; min-width: 100% !important; width: 100%; gap: 16px; }
   .kanban-col { width: 100%; max-height: none !important; overflow: visible; flex: none; }
   .kanban-col-header { padding: 16px 18px; min-height: 54px; }
   .kanban-col-title { font-size: 14px; line-height: 1.3; white-space: normal; overflow-wrap: anywhere; letter-spacing: 0; }
@@ -1434,6 +1447,75 @@ function setupCrmForClient() {
   }
 }
 
+function arrangeCrmMobileOrder() {
+  const crm = document.getElementById('crm-view');
+  const banner = document.getElementById('valor-fechado-banner');
+  const boardScroll = document.querySelector('#crm-view .crm-board-scroll');
+  const boardRange = document.getElementById('crm-board-scrollbar-wrap');
+  const distChart = document.getElementById('funil-chart-container');
+  const evolChart = document.getElementById('funil-evolucao-container');
+  if (!crm || !banner || !boardScroll || !boardRange || !distChart || !evolChart) return;
+  const isMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+  if (isMobile) {
+    crm.insertBefore(distChart, boardScroll);
+    crm.insertBefore(evolChart, boardScroll);
+    crm.insertBefore(boardRange, boardScroll.nextSibling);
+  } else {
+    crm.insertBefore(boardScroll, distChart);
+    crm.insertBefore(boardRange, distChart);
+  }
+}
+function adjustKanbanBoardScroll() {
+  const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  const range = document.getElementById('crm-board-scrollbar');
+  const wrap = document.getElementById('crm-board-scrollbar-wrap');
+  if (!board || !boardScroll || !range || !wrap) return;
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+    board.style.width = '';
+    board.style.minWidth = '';
+    wrap.classList.remove('active');
+    return;
+  }
+  requestAnimationFrame(() => {
+    const cols = Array.from(board.querySelectorAll('.kanban-col'));
+    if (!cols.length) {
+      wrap.classList.remove('active');
+      return;
+    }
+    board.style.width = '';
+    board.style.minWidth = '';
+    const maxScroll = Math.max(0, boardScroll.scrollWidth - boardScroll.clientWidth);
+    range.max = String(maxScroll);
+    range.value = String(Math.min(boardScroll.scrollLeft, maxScroll));
+    wrap.classList.toggle('active', maxScroll > 2);
+    updateCrmScrollbarProgress();
+  });
+}
+function updateCrmScrollbarProgress() {
+  const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  const range = document.getElementById('crm-board-scrollbar');
+  if (!boardScroll || !range) return;
+  const max = Number(range.max || 0);
+  const value = Math.min(boardScroll.scrollLeft, max);
+  if (Math.abs(Number(range.value || 0) - value) > 1) range.value = String(value);
+  const progress = max > 0 ? (value / max) * 100 : 0;
+  range.style.setProperty('--scroll-progress', progress + '%');
+}
+function bindCrmBoardScrollbar() {
+  const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  const range = document.getElementById('crm-board-scrollbar');
+  if (!boardScroll || !range || range.dataset.bound === '1') return;
+  range.dataset.bound = '1';
+  range.addEventListener('input', () => {
+    boardScroll.scrollLeft = Number(range.value || 0);
+    updateCrmScrollbarProgress();
+  });
+  boardScroll.addEventListener('scroll', updateCrmScrollbarProgress, { passive: true });
+  window.addEventListener('resize', () => { arrangeCrmMobileOrder(); adjustKanbanBoardScroll(); });
+}
 function renderKanban() {
   const sel = document.getElementById('crm-client-select');
   const fromSel = sel && sel.value !== 'all' ? sel.value : null;
@@ -1630,6 +1712,9 @@ function renderKanban() {
 
     board.appendChild(col);
   });
+  arrangeCrmMobileOrder();
+  bindCrmBoardScrollbar();
+  adjustKanbanBoardScroll();
 }
 
 function onDragStart(e) {
@@ -2818,6 +2903,9 @@ function onCrmClientChange() {
       </div>
       <div class="crm-board-scroll">
         <div class="kanban-board" id="kanban-board"></div>
+      </div>
+      <div class="crm-scrollbar-wrap" id="crm-board-scrollbar-wrap">
+        <input class="crm-scrollbar-range" id="crm-board-scrollbar" type="range" min="0" max="0" value="0" step="1" aria-label="Rolar colunas do CRM">
       </div>
 
       <!-- Gráfico de distribuição por etapa -->
@@ -5084,6 +5172,75 @@ function setupCrmForClient() {
   }
 }
 
+function arrangeCrmMobileOrder() {
+  const crm = document.getElementById('crm-view');
+  const banner = document.getElementById('valor-fechado-banner');
+  const boardScroll = document.querySelector('#crm-view .crm-board-scroll');
+  const boardRange = document.getElementById('crm-board-scrollbar-wrap');
+  const distChart = document.getElementById('funil-chart-container');
+  const evolChart = document.getElementById('funil-evolucao-container');
+  if (!crm || !banner || !boardScroll || !boardRange || !distChart || !evolChart) return;
+  const isMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+  if (isMobile) {
+    crm.insertBefore(distChart, boardScroll);
+    crm.insertBefore(evolChart, boardScroll);
+    crm.insertBefore(boardRange, boardScroll.nextSibling);
+  } else {
+    crm.insertBefore(boardScroll, distChart);
+    crm.insertBefore(boardRange, distChart);
+  }
+}
+function adjustKanbanBoardScroll() {
+  const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  const range = document.getElementById('crm-board-scrollbar');
+  const wrap = document.getElementById('crm-board-scrollbar-wrap');
+  if (!board || !boardScroll || !range || !wrap) return;
+  if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+    board.style.width = '';
+    board.style.minWidth = '';
+    wrap.classList.remove('active');
+    return;
+  }
+  requestAnimationFrame(() => {
+    const cols = Array.from(board.querySelectorAll('.kanban-col'));
+    if (!cols.length) {
+      wrap.classList.remove('active');
+      return;
+    }
+    board.style.width = '';
+    board.style.minWidth = '';
+    const maxScroll = Math.max(0, boardScroll.scrollWidth - boardScroll.clientWidth);
+    range.max = String(maxScroll);
+    range.value = String(Math.min(boardScroll.scrollLeft, maxScroll));
+    wrap.classList.toggle('active', maxScroll > 2);
+    updateCrmScrollbarProgress();
+  });
+}
+function updateCrmScrollbarProgress() {
+  const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  const range = document.getElementById('crm-board-scrollbar');
+  if (!boardScroll || !range) return;
+  const max = Number(range.max || 0);
+  const value = Math.min(boardScroll.scrollLeft, max);
+  if (Math.abs(Number(range.value || 0) - value) > 1) range.value = String(value);
+  const progress = max > 0 ? (value / max) * 100 : 0;
+  range.style.setProperty('--scroll-progress', progress + '%');
+}
+function bindCrmBoardScrollbar() {
+  const board = document.getElementById('kanban-board');
+  const boardScroll = board ? board.closest('.crm-board-scroll') : null;
+  const range = document.getElementById('crm-board-scrollbar');
+  if (!boardScroll || !range || range.dataset.bound === '1') return;
+  range.dataset.bound = '1';
+  range.addEventListener('input', () => {
+    boardScroll.scrollLeft = Number(range.value || 0);
+    updateCrmScrollbarProgress();
+  });
+  boardScroll.addEventListener('scroll', updateCrmScrollbarProgress, { passive: true });
+  window.addEventListener('resize', () => { arrangeCrmMobileOrder(); adjustKanbanBoardScroll(); });
+}
 function renderKanban() {
   const sel = document.getElementById('crm-client-select');
   const fromSel = sel && sel.value !== 'all' ? sel.value : null;
@@ -5280,6 +5437,9 @@ function renderKanban() {
 
     board.appendChild(col);
   });
+  arrangeCrmMobileOrder();
+  bindCrmBoardScrollbar();
+  adjustKanbanBoardScroll();
 }
 
 function filtrarColuna(stageId, text) {
