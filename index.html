@@ -1147,6 +1147,20 @@ function isArteAzulejoClient(act) {
 
 const CLINICA_ACTS = ['act_1324786597927962', 'act_1311713804053571', 'act_728532149829958', 'act_379348482601330', 'act_456685107743703', 'act_457365536961711'];
 
+function getArteStagesMigrationKey(act) {
+  return 'arte_stages_default_migrated_' + act;
+}
+
+function getStagesForArteAzulejo(act, custom) {
+  const migrationKey = getArteStagesMigrationKey(act);
+  const migrated = localStorage.getItem(migrationKey) === '1';
+  if (!migrated) {
+    try { localStorage.removeItem('custom_stages_' + act); } catch(e) {}
+    try { localStorage.setItem(migrationKey, '1'); } catch(e) {}
+    return STAGES_ARTE_AZULEJO;
+  }
+  return (custom && custom.length) ? custom : STAGES_ARTE_AZULEJO;
+}
 function getCustomStages(act) {
   try {
     const raw = localStorage.getItem('custom_stages_' + act);
@@ -1156,11 +1170,12 @@ function getCustomStages(act) {
 
 function saveCustomStages(act, stages) {
   localStorage.setItem('custom_stages_' + act, JSON.stringify(stages));
+  if (isArteAzulejoClient(act)) localStorage.setItem(getArteStagesMigrationKey(act), '1');
 }
 
 function getStages(act) {
-  if (isArteAzulejoClient(act)) return STAGES_ARTE_AZULEJO;
   const custom = getCustomStages(act);
+  if (isArteAzulejoClient(act)) return getStagesForArteAzulejo(act, custom);
   if (custom && custom.length) return custom;
   return CLINICA_ACTS.includes(act) ? STAGES_CLINICA : STAGES_DEFAULT;
 }
@@ -1279,9 +1294,42 @@ function getCurrentMonthKey() {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 }
 
+function parseCrmDateToISO(value, fallbackIso) {
+  if (value === null || value === undefined || value === '') return fallbackIso || new Date().toISOString();
+
+  if (typeof value === 'number' && !isNaN(value)) {
+    return new Date((Math.floor(value - 25569)) * 86400 * 1000 + 12 * 60 * 60 * 1000).toISOString();
+  }
+
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    return new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12, 0, 0).toISOString();
+  }
+
+  const raw = String(value).trim();
+  const br = raw.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})$/);
+  if (br) {
+    const day = Number(br[1]);
+    const month = Number(br[2]);
+    let year = Number(br[3]);
+    if (year < 100) year += 2000;
+    if (day >= 1 && day <= 31 && month >= 1 && month <= 12) {
+      return new Date(year, month - 1, day, 12, 0, 0).toISOString();
+    }
+  }
+
+  const iso = raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (iso) {
+    return new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]), 12, 0, 0).toISOString();
+  }
+
+  const parsed = new Date(raw);
+  return isNaN(parsed.getTime()) ? (fallbackIso || new Date().toISOString()) : parsed.toISOString();
+}
 function getLeadMonthKey(lead) {
-  if (!lead || !lead.createdAt) return '';
-  const d = new Date(lead.createdAt);
+  if (!lead) return '';
+  const rawDate = lead.createdAt || lead.chegada || lead.entrada || lead.data || lead.dataCriacao || lead.created_at;
+  if (!rawDate) return '';
+  const d = new Date(parseCrmDateToISO(rawDate, ''));
   if (isNaN(d.getTime())) return '';
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 }
@@ -1295,13 +1343,12 @@ function formatCrmMonthLabel(monthKey) {
 
 function leadDateInputValue(lead) {
   if (!lead || !lead.createdAt) return new Date().toISOString().slice(0, 10);
-  const d = new Date(lead.createdAt);
+  const d = new Date(parseCrmDateToISO(lead.createdAt, ''));
   return isNaN(d.getTime()) ? new Date().toISOString().slice(0, 10) : d.toISOString().slice(0, 10);
 }
 
 function createdAtFromDateInput(value, fallbackIso) {
-  if (value) return new Date(value + 'T12:00:00').toISOString();
-  return fallbackIso || new Date().toISOString();
+  return parseCrmDateToISO(value, fallbackIso || new Date().toISOString());
 }
 
 function getCrmBaseLeads(filterAct) {
@@ -4061,7 +4108,7 @@ async function confirmarImportacao() {
       const val = rawVal === null || rawVal === undefined ? '' : String(rawVal).trim();
 
       if (field === 'stage') { lead.stage = resolveStage(val); }
-      else if (field === 'chegada') { lead.createdAt = typeof rawVal === 'number' ? excelDateToISO(rawVal) : (val ? new Date(val).toISOString() : new Date().toISOString()); }
+      else if (field === 'chegada') { lead.createdAt = parseCrmDateToISO(rawVal, new Date().toISOString()); lead.importedDateRaw = val; }
       else if (field === 'valor') {
         rawValor = rawVal;
         const v = val.toLowerCase();
@@ -4257,6 +4304,20 @@ function getArteAzulejoStageForBoard(lead, boardAct) {
 
 const CLINICA_ACTS = ['act_1324786597927962', 'act_1311713804053571', 'act_728532149829958', 'act_379348482601330', 'act_456685107743703', 'act_457365536961711'];
 
+function getArteStagesMigrationKey(act) {
+  return 'arte_stages_default_migrated_' + act;
+}
+
+function getStagesForArteAzulejo(act, custom) {
+  const migrationKey = getArteStagesMigrationKey(act);
+  const migrated = localStorage.getItem(migrationKey) === '1';
+  if (!migrated) {
+    try { localStorage.removeItem('custom_stages_' + act); } catch(e) {}
+    try { localStorage.setItem(migrationKey, '1'); } catch(e) {}
+    return STAGES_ARTE_AZULEJO;
+  }
+  return (custom && custom.length) ? custom : STAGES_ARTE_AZULEJO;
+}
 function getCustomStages(act) {
   try {
     const raw = localStorage.getItem('custom_stages_' + act);
@@ -4266,17 +4327,13 @@ function getCustomStages(act) {
 
 function saveCustomStages(act, stages) {
   localStorage.setItem('custom_stages_' + act, JSON.stringify(stages));
+  if (isArteAzulejoClient(act)) localStorage.setItem(getArteStagesMigrationKey(act), '1');
 }
 
 function getStages(act) {
-  if (isArteAzulejoClient(act)) return STAGES_ARTE_AZULEJO;
-  try {
-    const raw = localStorage.getItem('custom_stages_' + act);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (parsed && parsed.length) return parsed;
-    }
-  } catch(e) {}
+  const custom = getCustomStages(act);
+  if (isArteAzulejoClient(act)) return getStagesForArteAzulejo(act, custom);
+  if (custom && custom.length) return custom;
   return CLINICA_ACTS.includes(act) ? STAGES_CLINICA : STAGES_DEFAULT;
 }
 
@@ -4863,9 +4920,42 @@ function getCurrentMonthKey() {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
 }
 
+function parseCrmDateToISO(value, fallbackIso) {
+  if (value === null || value === undefined || value === '') return fallbackIso || new Date().toISOString();
+
+  if (typeof value === 'number' && !isNaN(value)) {
+    return new Date((Math.floor(value - 25569)) * 86400 * 1000 + 12 * 60 * 60 * 1000).toISOString();
+  }
+
+  if (value instanceof Date && !isNaN(value.getTime())) {
+    return new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12, 0, 0).toISOString();
+  }
+
+  const raw = String(value).trim();
+  const br = raw.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})$/);
+  if (br) {
+    const day = Number(br[1]);
+    const month = Number(br[2]);
+    let year = Number(br[3]);
+    if (year < 100) year += 2000;
+    if (day >= 1 && day <= 31 && month >= 1 && month <= 12) {
+      return new Date(year, month - 1, day, 12, 0, 0).toISOString();
+    }
+  }
+
+  const iso = raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (iso) {
+    return new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]), 12, 0, 0).toISOString();
+  }
+
+  const parsed = new Date(raw);
+  return isNaN(parsed.getTime()) ? (fallbackIso || new Date().toISOString()) : parsed.toISOString();
+}
 function getLeadMonthKey(lead) {
-  if (!lead || !lead.createdAt) return '';
-  const d = new Date(lead.createdAt);
+  if (!lead) return '';
+  const rawDate = lead.createdAt || lead.chegada || lead.entrada || lead.data || lead.dataCriacao || lead.created_at;
+  if (!rawDate) return '';
+  const d = new Date(parseCrmDateToISO(rawDate, ''));
   if (isNaN(d.getTime())) return '';
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 }
@@ -4879,13 +4969,12 @@ function formatCrmMonthLabel(monthKey) {
 
 function leadDateInputValue(lead) {
   if (!lead || !lead.createdAt) return new Date().toISOString().slice(0, 10);
-  const d = new Date(lead.createdAt);
+  const d = new Date(parseCrmDateToISO(lead.createdAt, ''));
   return isNaN(d.getTime()) ? new Date().toISOString().slice(0, 10) : d.toISOString().slice(0, 10);
 }
 
 function createdAtFromDateInput(value, fallbackIso) {
-  if (value) return new Date(value + 'T12:00:00').toISOString();
-  return fallbackIso || new Date().toISOString();
+  return parseCrmDateToISO(value, fallbackIso || new Date().toISOString());
 }
 
 function getCrmBaseLeads(filterAct) {
