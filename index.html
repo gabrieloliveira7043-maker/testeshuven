@@ -5918,7 +5918,9 @@ function editLead(id) {
   document.getElementById('lead-plantao').value = lead.plantao || '';
   document.getElementById('lead-valor').value = lead.valor || '';
   lead = normalizeImportedLeadFields(lead);
+  document.getElementById('lead-origem').value = lead.origem || '';
   document.getElementById('lead-rede-social').value = lead.redeSocial || '';
+  document.getElementById('lead-obs').value = lead.obs || '';
   // Reset campos configuráveis para visível antes de aplicar config
   ['field-valor','field-origem','field-rede-social','field-obs','field-proxima-acao','field-proxima-data'].forEach(id => {
     const el = document.getElementById(id);
@@ -5937,9 +5939,11 @@ function editLead(id) {
   stageSelect.value = getArteAzulejoStageForBoard(lead, lead.act);
   document.getElementById('modal-title').textContent = 'Editar lead';
   if (lead.act) applyFieldConfig(lead.act);
-  // Restaurar valor do select rede social após applyFieldConfig sobrescrever opções
+  // Restaurar valores após applyFieldConfig sobrescrever opções
   lead = normalizeImportedLeadFields(lead);
+  document.getElementById('lead-origem').value = lead.origem || '';
   document.getElementById('lead-rede-social').value = lead.redeSocial || '';
+  document.getElementById('lead-obs').value = lead.obs || '';
   document.getElementById('lead-modal').classList.add('open');
 }
 
@@ -6548,6 +6552,8 @@ function onCrmClientChange() {
 </script>
 </body>
 </html>
+
+
 
 
 
