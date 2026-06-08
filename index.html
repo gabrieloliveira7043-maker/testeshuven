@@ -1,7 +1,15 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="192x192" href="huven-icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="huven-apple-touch-icon.png">
+<link rel="apple-touch-icon-precomposed" sizes="180x180" href="huven-apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Huven">
+<meta name="application-name" content="Huven">
+<meta name="theme-color" content="#0D0E12">
   <link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ads Report</title>
@@ -499,6 +507,51 @@ tr:hover td { background: var(--surface2); }
     border-color: rgba(37,211,102,0.62) !important;
     background: rgba(37,211,102,0.22) !important;
   }
+  .chat-view { display:none; padding:28px 32px; overflow:hidden; box-sizing:border-box; width:100%; }
+  .chat-view h1 { font-size:20px; font-weight:600; color:var(--text); margin-bottom:4px; }
+  .chat-subtitle { font-size:13px; color:var(--muted); margin-bottom:18px; }
+  .chat-shell { display:grid; grid-template-columns:320px minmax(0,1fr); min-height:calc(100vh - 60px); border:1px solid var(--border); border-radius:var(--r2); background:var(--surface); overflow:hidden; }
+  .chat-list-panel { border-right:1px solid var(--border); min-width:0; display:flex; flex-direction:column; max-height:calc(100vh - 60px); }
+  .chat-search-wrap { padding:14px; border-bottom:1px solid var(--border); }
+  .chat-search { width:100%; height:36px; border:1px solid var(--border2); border-radius:8px; background:var(--surface2); color:var(--text); padding:0 12px; outline:none; font:13px 'Inter', sans-serif; box-sizing:border-box; }
+  .chat-list { flex:1; overflow-y:auto; }
+  .chat-item { display:flex; align-items:center; gap:10px; padding:12px 14px; cursor:pointer; border-bottom:1px solid rgba(120,120,255,0.05); }
+  .chat-item:hover,.chat-item.active { background:var(--accent-glow2); }
+  .chat-avatar { width:38px; height:38px; border-radius:50%; background:var(--surface3); color:var(--accent2); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; flex-shrink:0; }
+  .chat-item-name { font-size:13px; color:var(--text); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chat-item-preview { font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chat-item-time { font-size:11px; color:var(--muted); flex-shrink:0; margin-left:auto; align-self:flex-start; padding-top:2px; }
+  .chat-item-unread { background:var(--accent2); color:#fff; border-radius:10px; font-size:10px; font-weight:700; padding:1px 6px; flex-shrink:0; }
+  .chat-panel { display:flex; flex-direction:column; min-width:0; min-height:0; max-height:calc(100vh - 60px); }
+  .chat-header { min-height:68px; padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-shrink:0; }
+  .chat-header-title { font-size:15px; font-weight:600; color:var(--text); }
+  .chat-header-meta { font-size:12px; color:var(--muted); margin-top:2px; }
+  .chat-thread { flex:1; padding:18px; overflow:auto; background:rgba(0,0,0,0.08); display:flex; flex-direction:column; gap:10px; }
+  .chat-empty { color:var(--muted); font-size:13px; text-align:center; padding:28px; }
+  .chat-bubble { max-width:72%; padding:10px 12px; border-radius:12px; font-size:13px; line-height:1.45; white-space:pre-wrap; }
+  .chat-bubble.in { align-self:flex-start; background:var(--surface2); color:var(--text); border:1px solid var(--border); border-bottom-left-radius:4px; }
+  .chat-bubble.out { align-self:flex-end; background:rgba(37,211,102,0.14); color:var(--text); border:1px solid rgba(37,211,102,0.24); border-bottom-right-radius:4px; }
+  .chat-bubble-time { display:block; margin-top:5px; color:var(--muted); font-size:10px; text-align:right; }
+  .chat-bubble-ticks { font-size:11px; margin-left:4px; }
+  .chat-bubble-ticks.read { color:#53bdeb; }
+  .chat-date-divider { text-align:center; font-size:11px; color:var(--muted); padding:4px 12px; background:rgba(0,0,0,0.18); border-radius:10px; align-self:center; margin:4px 0; }
+  .chat-composer { padding:12px; border-top:1px solid var(--border); display:flex; gap:10px; background:var(--surface); flex-shrink:0; }
+  .chat-composer textarea { flex:1; min-height:38px; max-height:120px; resize:none; border-radius:8px; border:1px solid var(--border); background:var(--surface2); color:var(--text); padding:9px 12px; font:13px 'Inter',sans-serif; outline:none; }
+  .chat-send-btn,.chat-open-wa,.whatsapp-action-btn { min-height:36px; padding:0 14px; border-radius:8px; border:1px solid rgba(37,211,102,0.32); background:rgba(37,211,102,0.12); color:#25d366; font:600 12px 'Inter', sans-serif; cursor:pointer; }
+  .chat-send-btn:disabled,.whatsapp-action-btn:disabled { opacity:.55; cursor:not-allowed; }
+  .new-chat-contact-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; cursor:pointer; }
+  .new-chat-contact-item:hover { background:var(--surface2); }
+  .chat-composer textarea { flex:1; min-height:42px; max-height:110px; resize:vertical; border:1px solid var(--border2); border-radius:8px; background:var(--surface2); color:var(--text); padding:10px 12px; outline:none; font:13px 'Inter', sans-serif; }
+  .chat-send-btn,.chat-open-wa,.whatsapp-action-btn { min-height:36px; padding:0 14px; border-radius:8px; border:1px solid rgba(37,211,102,0.32); background:rgba(37,211,102,0.12); color:#25d366; font:600 12px 'Inter', sans-serif; cursor:pointer; }
+  .chat-send-btn:disabled,.whatsapp-action-btn:disabled { opacity:.55; cursor:not-allowed; }
+  .whatsapp-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r2); padding:18px; margin-top:18px; }
+  .whatsapp-status-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin:14px 0; }
+  .whatsapp-status-box { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px; }
+  .whatsapp-status-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:4px; }
+  .whatsapp-status-value { font-size:13px; color:var(--text); font-weight:600; word-break:break-word; }
+  .whatsapp-qr-wrap { display:none; margin-top:14px; padding:14px; background:#fff; border-radius:8px; width:max-content; max-width:100%; }
+  .whatsapp-qr-wrap img { width:220px; height:220px; display:block; object-fit:contain; }
+  .whatsapp-log { margin-top:10px; font-size:12px; color:var(--muted); white-space:pre-wrap; }
   .card-btn {
     flex: 1; padding: 4px; font-size: 11px; border-radius: 5px;
     border: 1px solid var(--border2); background: transparent;
@@ -1500,7 +1553,7 @@ function abrirAtendimento() {
 }
 
 function switchView(view) {
-  ['report','crm','conta','contatos','integracoes'].forEach(v => {
+  ['report','crm','conta','contatos','whatsapp','chat'].forEach(v => {
     const el = document.getElementById('nav-' + v);
     if (el) el.classList.toggle('active', v === view);
   });
@@ -1508,6 +1561,8 @@ function switchView(view) {
   document.querySelector('.content').style.display = view === 'report' ? 'block' : 'none';
   document.getElementById('crm-view').style.display = view === 'crm' ? 'block' : 'none';
   document.getElementById('conta-view').style.display = view === 'conta' ? 'block' : 'none';
+  const chatView = document.getElementById('chat-view');
+  if (chatView) chatView.style.display = view === 'chat' ? 'block' : 'none';
   const contView = document.getElementById('contatos-view');
   if (contView) contView.style.display = view === 'contatos' ? 'block' : 'none';
   if (view === 'crm') {
@@ -1901,6 +1956,7 @@ function renderKanban() {
         <button class="card-btn del" onclick="deleteLead('${safeLeadId}')">✕</button>
       </div>`;
       cardHTML = cardHTML.replace(`openFirstWhatsAppMessage('${lead.id}')`, `openFirstWhatsAppMessage('${safeLeadId}')`);
+      cardHTML = cardHTML.replace(/onclick="window\.open\('https:\/\/wa\.me\/[^']+','_blank'\)"/, `onclick="openLeadChat('${safeLeadId}')"`);
       card.innerHTML = cardHTML;
       cardsDiv.appendChild(card);
     });
@@ -2072,7 +2128,7 @@ function buildFirstWhatsAppMessage(lead) {
   return `Olá ${firstName}, tudo bem? Recebemos seu cadastro e vou te ajudar com as informações por aqui.${source}`;
 }
 
-function openFirstWhatsAppMessage(id) {
+async function openFirstWhatsAppMessage(id) {
   const leads = getLeads();
   const lead = leads.find(l => l.id === id);
   if (!lead) return;
@@ -2082,21 +2138,31 @@ function openFirstWhatsAppMessage(id) {
     return;
   }
   const message = buildFirstWhatsAppMessage(lead);
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   const alreadySentFirstMessage = !!lead.whatsappFirstMessageAt;
-  if (!alreadySentFirstMessage) {
-    lead.whatsappFirstMessageAt = new Date().toISOString();
+  try {
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    if (!alreadySentFirstMessage) lead.whatsappFirstMessageAt = at;
+    lead.lastWhatsAppMessage = message;
+    lead.lastWhatsAppMessageAt = at;
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'first_' + Date.now(), direction: 'out', text: message, at, source: 'first-message-button' });
     if (!lead.history) lead.history = [];
     lead.history.push({ stage: '1ª mensagem enviada', at: new Date().toLocaleString('pt-BR') });
+    if (_leadsCache) {
+      const cacheIdx = _leadsCache.findIndex(l => l.id === id);
+      if (cacheIdx !== -1) _leadsCache[cacheIdx] = { ..._leadsCache[cacheIdx], ...lead };
+    }
+    await saveLeadToDb(lead);
+    renderKanban();
+    openLeadChat(id);
+    showToast('Primeira mensagem enviada.', 'success');
+  } catch(e) {
+    showToast('Erro ao enviar primeira mensagem: ' + (e.message || e), 'warning');
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   }
-  if (_leadsCache) {
-    const cacheIdx = _leadsCache.findIndex(l => l.id === id);
-    if (cacheIdx !== -1) _leadsCache[cacheIdx] = { ..._leadsCache[cacheIdx], ...lead };
-  }
-  saveLeadToDb(lead);
-  renderKanban();
-  window.open(url, '_blank');
 }
 window.openFirstWhatsAppMessage = openFirstWhatsAppMessage;
 
@@ -2166,7 +2232,7 @@ function moveLeadTo(id, stageId) {
 
 
 function setMobileNav(view) {
-  ['report','crm','conta','integracoes','cfg'].forEach(v => {
+  ['report','crm','conta','integracoes','chat','cfg'].forEach(v => {
     const el = document.getElementById('mnav-' + v);
     if (el) el.classList.toggle('active', v === view);
   });
@@ -2738,6 +2804,769 @@ function buildSheetsAppsScript(workerUrl, secret, act) {
   ].join("\n");
 }
 
+let activeChatLeadId = null;
+
+// ===== WHATSAPP WEB — LÓGICA PRINCIPAL =====
+// act fixo da instância conectada (Catapulta Boleto)
+const VZAPS_DEFAULT_ACT = 'act_1712273919281701';
+
+// Estado do chat
+let _chatTab = 'vzaps'; // 'vzaps' | 'crm'
+let _vzapsChats = []; // chats reais da VZaps
+let _activeChatPhone = null; // telefone da conversa ativa (modo vzaps)
+let _activeChatName = '';
+let _vzapsMsgs = []; // mensagens da conversa ativa
+let _chatPollingTimer = null;
+let _chatLoading = false;
+
+// ---- Tabs ----
+function setChatTab(tab) {
+  _chatTab = tab;
+  const tabVzaps = document.getElementById('tab-vzaps');
+  const tabCrm = document.getElementById('tab-crm');
+  if (tabVzaps) {
+    tabVzaps.style.color = tab === 'vzaps' ? 'var(--accent2)' : 'var(--muted)';
+    tabVzaps.style.borderBottomColor = tab === 'vzaps' ? 'var(--accent2)' : 'transparent';
+  }
+  if (tabCrm) {
+    tabCrm.style.color = tab === 'crm' ? 'var(--accent2)' : 'var(--muted)';
+    tabCrm.style.borderBottomColor = tab === 'crm' ? 'var(--accent2)' : 'transparent';
+  }
+  renderChatList();
+}
+
+function onChatSearch() {
+  renderChatList();
+}
+
+// ---- Carregar chats da VZaps ----
+async function loadVzapsChats(silent = false) {
+  if (_chatLoading) return;
+  _chatLoading = true;
+  try {
+    const act = VZAPS_DEFAULT_ACT;
+    const data = await whatsappWorkerJson(`/chats?act=${encodeURIComponent(act)}&page_size=100`);
+    const raw = data?.data?.data || data?.data || [];
+    const chats = Array.isArray(raw) ? raw : [];
+    _vzapsChats = chats.map(c => {
+      const phone = normalizeWhatsAppPhone(c.jid || c.phone || c.id || '');
+      return {
+        phone,
+        name: c.name || c.pushName || c.notifyName || phone || 'Contato',
+        lastMessage: c.lastMessage?.text || c.lastMessage?.body || c.conversation || '',
+        lastMessageAt: c.lastMessage?.timestamp || c.timestamp || c.updatedAt || '',
+        unread: c.unreadCount || c.unread || 0,
+        jid: c.jid || c.id || '',
+      };
+    }).filter(c => c.phone);
+
+    // Mesclar com dados do Firebase (nome do CRM)
+    _vzapsChats.forEach(c => {
+      const lead = getLeads().find(l => normalizeWhatsAppPhone(l.phone || '') === c.phone);
+      if (lead && lead.name) c.crmName = lead.name;
+    });
+
+    if (!silent) {
+      const status = document.getElementById('chat-list-status');
+      if (status) status.textContent = `${_vzapsChats.length} conversa${_vzapsChats.length !== 1 ? 's' : ''} · atualizado agora`;
+    }
+    renderChatList();
+
+    // Se tem conversa ativa, atualizar mensagens
+    if (_activeChatPhone) await loadVzapsMessages(_activeChatPhone, true);
+  } catch(e) {
+    const status = document.getElementById('chat-list-status');
+    if (status) status.textContent = 'Erro ao carregar chats';
+    console.warn('loadVzapsChats erro:', e);
+  } finally {
+    _chatLoading = false;
+  }
+}
+
+// ---- Carregar mensagens de uma conversa ----
+async function loadVzapsMessages(phone, silent = false) {
+  if (!phone) return;
+  const act = VZAPS_DEFAULT_ACT;
+  try {
+    const data = await whatsappWorkerJson(`/chat/messages?act=${encodeURIComponent(act)}&phone=${encodeURIComponent(phone)}`);
+    const conv = data?.conversation;
+    _vzapsMsgs = Array.isArray(conv?.messages) ? conv.messages : [];
+    _activeChatName = conv?.name || _activeChatName;
+    if (_activeChatPhone === phone) renderChatThread();
+  } catch(e) {
+    console.warn('loadVzapsMessages erro:', e);
+  }
+}
+
+// ---- Renderizar lista de chats ----
+function renderChatList() {
+  const list = document.getElementById('chat-list');
+  if (!list) return;
+  const query = String(document.getElementById('chat-search')?.value || '').toLowerCase().trim();
+
+  if (_chatTab === 'vzaps') {
+    let chats = _vzapsChats;
+    if (query) {
+      chats = chats.filter(c =>
+        (c.name || '').toLowerCase().includes(query) ||
+        (c.crmName || '').toLowerCase().includes(query) ||
+        (c.phone || '').includes(query) ||
+        (c.lastMessage || '').toLowerCase().includes(query)
+      );
+    }
+    if (!chats.length) {
+      list.innerHTML = `<div class="chat-empty">${query ? 'Nenhuma conversa encontrada.' : 'Nenhuma conversa. Aguardando mensagens...'}</div>`;
+      return;
+    }
+    list.innerHTML = chats.map(c => {
+      const active = c.phone === _activeChatPhone ? ' active' : '';
+      const displayName = c.crmName || c.name || c.phone;
+      const initials = getLeadInitials(displayName);
+      const time = c.lastMessageAt ? formatChatTimeShort(c.lastMessageAt) : '';
+      const preview = c.lastMessage ? limitText(c.lastMessage, 60) : '';
+      const unreadBadge = c.unread > 0 ? `<span class="chat-item-unread">${c.unread}</span>` : '';
+      return `<div class="chat-item${active}" onclick="selectVzapsChat('${escapeJsString(c.phone)}','${escapeJsString(displayName)}')">
+        <div class="chat-avatar">${escapeHtml(initials)}</div>
+        <div style="min-width:0;flex:1;">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+            <div class="chat-item-name">${escapeHtml(displayName)}</div>
+            <div class="chat-item-time">${escapeHtml(time)}</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:4px;">
+            <div class="chat-item-preview">${escapeHtml(preview)}</div>
+            ${unreadBadge}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } else {
+    // Aba CRM — leads com mensagens
+    let leads = getChatLeads(query);
+    if (!leads.length) {
+      list.innerHTML = `<div class="chat-empty">${query ? 'Nenhum contato encontrado.' : 'Nenhuma conversa no CRM.'}</div>`;
+      return;
+    }
+    list.innerHTML = leads.map(lead => {
+      const active = lead.id === activeChatLeadId ? ' active' : '';
+      const messages = normalizeChatMessages(lead).slice().sort((a, b) => getChatMessageTime(a) - getChatMessageTime(b));
+      const last = messages[messages.length - 1];
+      const preview = (last && last.text) || lead.lastWhatsAppMessage || lead.phone || '';
+      return `<div class="chat-item${active}" onclick="selectChatLead('${escapeJsString(lead.id)}')">
+        <div class="chat-avatar">${escapeHtml(getLeadInitials(lead.name))}</div>
+        <div style="min-width:0;flex:1;">
+          <div class="chat-item-name">${escapeHtml(limitText(lead.name || 'Lead sem nome', 80))}</div>
+          <div class="chat-item-preview">${escapeHtml(limitText(preview, 60))}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+}
+
+// ---- Selecionar conversa VZaps ----
+async function selectVzapsChat(phone, name) {
+  _activeChatPhone = phone;
+  _activeChatName = name;
+  activeChatLeadId = null;
+  renderChatList();
+  // Mostrar header imediatamente
+  const header = document.getElementById('chat-header');
+  if (header) {
+    const lead = getLeads().find(l => normalizeWhatsAppPhone(l.phone || '') === phone);
+    const displayName = lead?.name || name;
+    header.innerHTML = `<div>
+      <div class="chat-header-title">${escapeHtml(displayName)}</div>
+      <div class="chat-header-meta">${escapeHtml(phone)}${lead ? ' · CRM: ' + escapeHtml(lead.stage || 'Lead') : ''}</div>
+    </div>
+    <button onclick="openLeadFromChat('${escapeJsString(phone)}')" style="font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;">Ver no CRM</button>`;
+  }
+  // Carregar mensagens
+  const thread = document.getElementById('chat-thread');
+  if (thread) thread.innerHTML = '<div class="chat-empty">Carregando mensagens...</div>';
+  await loadVzapsMessages(phone);
+}
+
+// ---- Renderizar thread de mensagens ----
+function renderChatThread() {
+  const thread = document.getElementById('chat-thread');
+  if (!thread) return;
+
+  if (_chatTab === 'crm') {
+    renderCrmThread();
+    return;
+  }
+
+  // Combinar mensagens VZaps + Firebase para a conversa ativa
+  let msgs = [..._vzapsMsgs];
+
+  // Adicionar mensagens do lead do CRM se existir
+  const lead = getLeads().find(l => normalizeWhatsAppPhone(l.phone || '') === _activeChatPhone);
+  if (lead) {
+    const crmMsgs = normalizeChatMessages(lead);
+    crmMsgs.forEach(cm => {
+      const exId = cm.externalId || cm.id || '';
+      if (!msgs.some(m => (m.externalId || m.id) === exId && exId)) {
+        msgs.push(cm);
+      }
+    });
+  }
+
+  msgs.sort((a, b) => new Date(a.at || a.timestamp || 0) - new Date(b.at || b.timestamp || 0));
+
+  if (!msgs.length) {
+    thread.innerHTML = '<div class="chat-empty">Nenhuma mensagem ainda. Inicie a conversa!</div>';
+    return;
+  }
+
+  let html = '';
+  let lastDate = '';
+  msgs.forEach(msg => {
+    const d = new Date(msg.at || msg.timestamp || 0);
+    const dateStr = isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric' });
+    if (dateStr && dateStr !== lastDate) {
+      html += `<div class="chat-date-divider">${escapeHtml(dateStr)}</div>`;
+      lastDate = dateStr;
+    }
+    const dir = msg.direction === 'out' ? 'out' : 'in';
+    const time = isNaN(d) ? '' : d.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+    const state = msg.state || '';
+    const ticks = dir === 'out' ? `<span class="chat-bubble-ticks ${state === 'Read' || state === 'ReadSelf' ? 'read' : ''}">${state === 'Read' || state === 'ReadSelf' ? '✓✓' : state === 'Delivered' ? '✓✓' : '✓'}</span>` : '';
+    const mediaHtml = msg.media?.url ? `<div style="margin-bottom:4px;font-size:11px;color:var(--muted);">📎 ${escapeHtml(msg.media.fileName || msg.media.type || 'Mídia')}</div>` : '';
+    html += `<div class="chat-bubble ${dir}">${mediaHtml}${escapeHtml(msg.text || '')}<span class="chat-bubble-time">${escapeHtml(time)}${ticks}</span></div>`;
+  });
+  thread.innerHTML = html;
+  thread.scrollTop = thread.scrollHeight;
+}
+
+function renderCrmThread() {
+  const thread = document.getElementById('chat-thread');
+  if (!thread) return;
+  const lead = activeChatLeadId ? getLeads().find(l => l.id === activeChatLeadId) : null;
+  if (!lead) { thread.innerHTML = '<div class="chat-empty">Selecione uma conversa.</div>'; return; }
+  const msgs = normalizeChatMessages(lead).slice().sort((a, b) => getChatMessageTime(a) - getChatMessageTime(b));
+  if (!msgs.length) { thread.innerHTML = '<div class="chat-empty">Nenhuma mensagem ainda.</div>'; return; }
+  thread.innerHTML = msgs.map(msg => {
+    const dir = msg.direction === 'out' ? 'out' : 'in';
+    const time = formatChatTime(msg.at || msg.createdAt || msg.timestamp);
+    return `<div class="chat-bubble ${dir}">${escapeHtml(msg.text || '')}<span class="chat-bubble-time">${escapeHtml(time)}</span></div>`;
+  }).join('');
+  thread.scrollTop = thread.scrollHeight;
+}
+
+// ---- Abrir lead do CRM a partir do chat ----
+function openLeadFromChat(phone) {
+  const lead = getLeads().find(l => normalizeWhatsAppPhone(l.phone || '') === phone);
+  if (lead) { openLeadChat(lead.id); }
+}
+
+// ---- Nova conversa ----
+function openNewChat() {
+  const modal = document.getElementById('new-chat-modal');
+  if (modal) { modal.style.display = 'flex'; renderNewChatContacts(); }
+  document.getElementById('new-chat-search')?.focus();
+}
+function closeNewChat() {
+  const modal = document.getElementById('new-chat-modal');
+  if (modal) modal.style.display = 'none';
+}
+function renderNewChatContacts() {
+  const query = String(document.getElementById('new-chat-search')?.value || '').toLowerCase().trim();
+  const container = document.getElementById('new-chat-contacts');
+  if (!container) return;
+
+  // Todos os leads com telefone
+  let leads = getLeads().filter(l => l.phone);
+  if (query) {
+    leads = leads.filter(l =>
+      (l.name || '').toLowerCase().includes(query) ||
+      (l.phone || '').includes(query)
+    );
+    // Se parece número, mostrar opção de digitar direto
+    if (/^[\d\s()+\-]+$/.test(query) && query.replace(/\D/g,'').length >= 8) {
+      const phone = normalizeWhatsAppPhone(query);
+      const directHtml = `<div class="new-chat-contact-item" onclick="startNewChatDirect('${escapeJsString(phone)}','${escapeJsString(query)}')">
+        <div class="chat-avatar" style="background:rgba(37,211,102,0.15);color:#25d366;">📱</div>
+        <div><div style="font-size:13px;font-weight:600;color:var(--text);">Enviar para ${escapeHtml(phone)}</div><div style="font-size:12px;color:var(--muted);">Número não cadastrado no CRM</div></div>
+      </div>`;
+      container.innerHTML = directHtml + leads.slice(0, 20).map(l => contactItem(l)).join('');
+      return;
+    }
+  }
+  leads = leads.slice(0, 30);
+  container.innerHTML = leads.length ? leads.map(l => contactItem(l)).join('') : '<div class="chat-empty">Nenhum contato encontrado.</div>';
+}
+function contactItem(lead) {
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  return `<div class="new-chat-contact-item" onclick="startNewChatFromLead('${escapeJsString(lead.id)}')">
+    <div class="chat-avatar">${escapeHtml(getLeadInitials(lead.name))}</div>
+    <div><div style="font-size:13px;font-weight:600;color:var(--text);">${escapeHtml(lead.name || 'Lead sem nome')}</div><div style="font-size:12px;color:var(--muted);">${escapeHtml(phone)}</div></div>
+  </div>`;
+}
+function startNewChatFromLead(leadId) {
+  const lead = getLeads().find(l => l.id === leadId);
+  if (!lead) return;
+  closeNewChat();
+  _chatTab = 'vzaps';
+  setChatTab('vzaps');
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  selectVzapsChat(phone, lead.name || phone);
+}
+function startNewChatDirect(phone, raw) {
+  closeNewChat();
+  _chatTab = 'vzaps';
+  setChatTab('vzaps');
+  _activeChatPhone = phone;
+  _activeChatName = raw;
+  _vzapsMsgs = [];
+  renderChatList();
+  renderChatThread();
+  const header = document.getElementById('chat-header');
+  if (header) {
+    header.innerHTML = `<div><div class="chat-header-title">${escapeHtml(phone)}</div><div class="chat-header-meta">Nova conversa</div></div>`;
+  }
+}
+
+// ---- Renderizar chat (compatibilidade com código existente) ----
+function renderChat() {
+  if (_chatTab === 'vzaps') {
+    renderChatList();
+    renderChatThread();
+  } else {
+    // Aba CRM
+    const header = document.getElementById('chat-header');
+    const input = document.getElementById('chat-message-input');
+    const lead = activeChatLeadId ? getLeads().find(l => l.id === activeChatLeadId) : null;
+    if (header) {
+      if (lead) {
+        header.innerHTML = `<div><div class="chat-header-title">${escapeHtml(lead.name || 'Lead sem nome')}</div><div class="chat-header-meta">${escapeHtml(lead.phone || '')}${lead.act ? ' · ' + escapeHtml(CLIENT_NAMES[lead.act] || lead.act) : ''}</div></div>`;
+      } else {
+        header.innerHTML = '<div><div class="chat-header-title">Selecione uma conversa</div><div class="chat-header-meta">As mensagens aparecerão aqui.</div></div>';
+      }
+    }
+    if (input) input.disabled = !lead;
+    renderChatList();
+    renderCrmThread();
+  }
+}
+
+// ---- Enviar mensagem (adaptado para VZaps ou CRM) ----
+async function sendChatMessage() {
+  const input = document.getElementById('chat-message-input');
+  const button = document.getElementById('chat-send-btn');
+  const message = String(input?.value || '').trim();
+  if (!message) return;
+
+  if (_chatTab === 'vzaps' && _activeChatPhone) {
+    try {
+      if (button) button.disabled = true;
+      const act = VZAPS_DEFAULT_ACT;
+      await whatsappWorkerJson('/send', { method: 'POST', body: { act, phone: _activeChatPhone, message, name: _activeChatName } });
+      const at = new Date().toISOString();
+      _vzapsMsgs.push({ id: 'local_' + Date.now(), direction: 'out', text: message, at, source: 'crm' });
+      if (input) input.value = '';
+      renderChatThread();
+      // Salvar no lead do CRM se existir
+      const lead = getLeads().find(l => normalizeWhatsAppPhone(l.phone || '') === _activeChatPhone);
+      if (lead) {
+        if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+        lead.chatMessages.push({ id: 'local_' + Date.now(), direction: 'out', text: message, at, source: 'crm' });
+        lead.lastWhatsAppMessage = message; lead.lastWhatsAppMessageAt = at; lead.updatedAt = at;
+        saveLeadToDb(lead).catch(() => null);
+      }
+    } catch(e) {
+      showToast('Erro ao enviar: ' + (e.message || e), 'error');
+    } finally {
+      if (button) button.disabled = false;
+    }
+    return;
+  }
+
+  // Aba CRM — envio pelo lead
+  const lead = activeChatLeadId ? getLeads().find(l => l.id === activeChatLeadId) : null;
+  if (!lead) { showToast('Selecione uma conversa.', 'warning'); return; }
+  try {
+    if (button) button.disabled = true;
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'local_' + Date.now(), direction: 'out', text: message, at, source: 'crm' });
+    lead.lastWhatsAppMessage = message; lead.lastWhatsAppMessageAt = at; lead.updatedAt = at;
+    if (input) input.value = '';
+    await saveLeadToDb(lead);
+    renderChat();
+    showToast('Mensagem enviada.', 'success');
+  } catch(e) {
+    showToast('Erro ao enviar: ' + (e.message || e), 'error');
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+
+// ---- Polling de 5s ----
+function startChatPolling() {
+  stopChatPolling();
+  _chatPollingTimer = setInterval(async () => {
+    const chatView = document.getElementById('chat-view');
+    if (!chatView || chatView.style.display === 'none') return;
+    await loadVzapsChats(true);
+  }, 5000);
+}
+function stopChatPolling() {
+  if (_chatPollingTimer) { clearInterval(_chatPollingTimer); _chatPollingTimer = null; }
+}
+
+// ---- Status de conexão e webhook ----
+async function checkChatConnectionStatus() {
+  const dot = document.getElementById('chat-conn-dot');
+  const label = document.getElementById('chat-conn-label');
+  if (!dot || !label) return;
+
+  dot.style.background = '#fbbf24';
+  label.style.color = '#fbbf24';
+  label.textContent = 'Verificando...';
+
+  try {
+    const act = VZAPS_DEFAULT_ACT;
+    // Verificar conexão WhatsApp
+    const statusData = await whatsappWorkerJson(`/instances/status?act=${encodeURIComponent(act)}`);
+    const connected = statusData?.connected === true;
+
+    // Verificar webhook
+    let webhookOk = false;
+    try {
+      const webhookData = await whatsappWorkerJson(`/instances/webhook?act=${encodeURIComponent(act)}`);
+      const webhookUrl = webhookData?.data?.webhookURL || webhookData?.data?.url || '';
+      webhookOk = !!webhookUrl && webhookUrl.includes('huven-vzaps');
+    } catch(e) { webhookOk = false; }
+
+    if (connected && webhookOk) {
+      dot.style.background = '#34d399';
+      label.style.color = '#34d399';
+      label.textContent = 'WhatsApp conectado · Webhook ativo';
+    } else if (connected && !webhookOk) {
+      dot.style.background = '#fbbf24';
+      label.style.color = '#fbbf24';
+      label.textContent = 'Conectado · Webhook inativo ⚠';
+    } else {
+      dot.style.background = '#f87171';
+      label.style.color = '#f87171';
+      label.textContent = 'WhatsApp desconectado';
+    }
+  } catch(e) {
+    dot.style.background = '#f87171';
+    label.style.color = '#f87171';
+    label.textContent = 'Erro ao verificar conexão';
+  }
+}
+window.checkChatConnectionStatus = checkChatConnectionStatus;
+
+
+function formatChatTimeShort(value) {
+  if (!value) return '';
+  const d = typeof value === 'number' ? new Date(value * 1000) : new Date(value);
+  if (isNaN(d)) return '';
+  const now = new Date();
+  const isToday = d.toDateString() === now.toDateString();
+  return isToday
+    ? d.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' })
+    : d.toLocaleDateString('pt-BR', { day:'2-digit', month:'2-digit' });
+}
+window.renderChat = renderChat;
+window.setChatTab = setChatTab;
+window.onChatSearch = onChatSearch;
+window.selectVzapsChat = selectVzapsChat;
+window.openNewChat = openNewChat;
+window.closeNewChat = closeNewChat;
+window.renderNewChatContacts = renderNewChatContacts;
+window.startNewChatFromLead = startNewChatFromLead;
+window.startNewChatDirect = startNewChatDirect;
+window.openLeadFromChat = openLeadFromChat;
+window.loadVzapsChats = loadVzapsChats;
+
+
+function currentWhatsAppAct() {
+  return getCurrentCrmActForSheets();
+}
+
+function whatsappHeaders() {
+  return { 'Content-Type': 'application/json', 'x-huven-secret': WHATSAPP_WORKER_SECRET };
+}
+
+function setWhatsAppLog(message) {
+  const el = document.getElementById('whatsapp-log');
+  if (el) el.textContent = message || '';
+}
+
+function updateWhatsAppIntegrationPanel(act, state = {}) {
+  const clientName = CLIENT_NAMES[act] || (activeClient ? activeClient.name : '') || act || '-';
+  const clientEl = document.getElementById('whatsapp-client-label');
+  const instanceEl = document.getElementById('whatsapp-instance-label');
+  const sessionEl = document.getElementById('whatsapp-session-label');
+  if (clientEl) clientEl.textContent = clientName ? `${clientName} | ${act || '-'}` : '-';
+  if (instanceEl) instanceEl.textContent = state.instanceText || (state.loading ? 'Carregando...' : instanceEl.textContent || 'Não carregada');
+  if (sessionEl) sessionEl.textContent = state.sessionText || (state.loading ? 'Carregando...' : sessionEl.textContent || 'Pendente');
+}
+
+async function whatsappWorkerJson(path, options = {}) {
+  const res = await fetch(`${WHATSAPP_WORKER_URL}${path}`, {
+    method: options.method || 'GET',
+    headers: whatsappHeaders(),
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.ok === false) throw new Error(data.error || data.hint || `HTTP ${res.status}`);
+  return data;
+}
+
+async function createWhatsAppInstance() {
+  const act = currentWhatsAppAct();
+  if (!act) { showToast('Selecione um cliente para criar a instância.', 'warning'); return; }
+  const btn = document.getElementById('btn-whatsapp-create');
+  try {
+    if (btn) btn.disabled = true;
+    setWhatsAppLog('Criando ou reaproveitando instância...');
+    const data = await whatsappWorkerJson('/instances/create', { method: 'POST', body: { act, name: CLIENT_NAMES[act] || act } });
+    updateWhatsAppIntegrationPanel(act, {
+      instanceText: data.instance?.id || 'Instância criada',
+      sessionText: data.instance?.connected ? 'Conectada' : 'Aguardando conexão'
+    });
+    setWhatsAppLog(data.reused ? 'Instância existente reaproveitada.' : 'Instância criada. Assine e depois conecte pelo QR Code.');
+    showToast('Instância WhatsApp pronta.', 'success');
+  } catch(e) {
+    setWhatsAppLog(e.message || String(e));
+    showToast('Erro na instância: ' + (e.message || e), 'warning');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function subscribeWhatsAppInstance() {
+  const act = currentWhatsAppAct();
+  if (!act) { showToast('Selecione um cliente.', 'warning'); return; }
+  const btn = document.getElementById('btn-whatsapp-subscribe');
+  try {
+    if (btn) btn.disabled = true;
+    setWhatsAppLog('Solicitando assinatura da instância...');
+    const data = await whatsappWorkerJson('/instances/subscribe', { method: 'POST', body: { act } });
+    setWhatsAppLog('Assinatura solicitada. ' + (data.data?.url ? `URL: ${data.data.url}` : 'Modo direto confirmado pela VZaps.'));
+    showToast('Assinatura solicitada.', 'success');
+    await refreshWhatsAppStatus();
+  } catch(e) {
+    setWhatsAppLog(e.message || String(e));
+    showToast('Erro ao assinar: ' + (e.message || e), 'warning');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function refreshWhatsAppStatus() {
+  const act = currentWhatsAppAct();
+  if (!act) return;
+  const data = await whatsappWorkerJson(`/instances/status?act=${encodeURIComponent(act)}`);
+  const status = data.data || {};
+  const connected = status.connected || status.status === 'CONNECTED' || status.state === 'open';
+  updateWhatsAppIntegrationPanel(act, {
+    instanceText: data.instance?.id || 'Instância configurada',
+    sessionText: connected ? 'Conectada' : (status.status || status.state || 'Aguardando conexão')
+  });
+  setWhatsAppLog('Status atualizado.');
+}
+
+async function loadWhatsAppQr() {
+  const act = currentWhatsAppAct();
+  if (!act) { showToast('Selecione um cliente.', 'warning'); return; }
+  const btn = document.getElementById('btn-whatsapp-qr');
+  try {
+    if (btn) btn.disabled = true;
+    setWhatsAppLog('Buscando QR Code...');
+    const data = await whatsappWorkerJson(`/instances/qr?act=${encodeURIComponent(act)}`);
+    const qr = data.qr || data.qrCode || data.data?.qr || data.data?.qrcode || data.data?.base64 || data.data?.image || '';
+    if (!qr) throw new Error(data.hint || 'A VZaps não retornou QR Code.');
+    const wrap = document.getElementById('whatsapp-qr-wrap');
+    const img = document.getElementById('whatsapp-qr-img');
+    if (img) img.src = qr;
+    if (wrap) wrap.style.display = 'block';
+    setWhatsAppLog('QR Code carregado.');
+  } catch(e) {
+    setWhatsAppLog(e.message || String(e));
+    showToast('Erro ao carregar QR: ' + (e.message || e), 'warning');
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+function normalizeChatMessages(lead) {
+  return normalizeLeadChatMessagesValue(lead && lead.chatMessages);
+}
+
+function getChatMessageTime(msg) {
+  const value = msg && (msg.at || msg.createdAt || msg.timestamp || msg.date);
+  if (!value) return 0;
+  const date = new Date(value);
+  return isNaN(date.getTime()) ? 0 : date.getTime();
+}
+
+function getLeadInitials(name) {
+  const words = String(name || 'Lead').trim().split(/\s+/).filter(Boolean);
+  return words.slice(0, 2).map(word => word[0]).join('').toUpperCase() || 'L';
+}
+
+function getChatLeads() {
+  let leads = getLeads().filter(lead => normalizeChatMessages(lead).length || lead.lastWhatsAppMessage || lead.whatsappChatSource);
+  const act = currentWhatsAppAct();
+  if (act) leads = leads.filter(lead => leadMatchesClient(lead, act));
+  return leads.sort((a, b) => {
+    const ta = Math.max(getLeadCrmSortTime(a), getChatMessageTime({ at: a.lastWhatsAppMessageAt }), ...normalizeChatMessages(a).map(getChatMessageTime));
+    const tb = Math.max(getLeadCrmSortTime(b), getChatMessageTime({ at: b.lastWhatsAppMessageAt }), ...normalizeChatMessages(b).map(getChatMessageTime));
+    return tb - ta;
+  });
+}
+
+function formatChatTime(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  if (isNaN(date.getTime())) return '';
+  return date.toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' });
+}
+
+function renderChat() {
+  const list = document.getElementById('chat-list');
+  const header = document.getElementById('chat-header');
+  const thread = document.getElementById('chat-thread');
+  const input = document.getElementById('chat-message-input');
+  if (!list || !header || !thread) return;
+  const query = String(document.getElementById('chat-search')?.value || '').toLowerCase().trim();
+  let leads = getChatLeads();
+  if (query) {
+    leads = leads.filter(lead =>
+      String(lead.name || '').toLowerCase().includes(query) ||
+      String(lead.phone || '').toLowerCase().includes(query) ||
+      String(lead.lastWhatsAppMessage || '').toLowerCase().includes(query)
+    );
+  }
+  if (!activeChatLeadId && leads.length) activeChatLeadId = leads[0].id;
+  if (activeChatLeadId && !leads.some(lead => lead.id === activeChatLeadId)) activeChatLeadId = leads.length ? leads[0].id : null;
+  list.innerHTML = leads.length ? leads.map(lead => {
+    const messages = normalizeChatMessages(lead).slice().sort((a, b) => getChatMessageTime(a) - getChatMessageTime(b));
+    const last = messages[messages.length - 1];
+    const preview = (last && last.text) || lead.lastWhatsAppMessage || lead.obs || lead.phone || '';
+    const active = lead.id === activeChatLeadId ? ' active' : '';
+    return `<div class="chat-item${active}" onclick="selectChatLead('${escapeJsString(lead.id)}')">
+      <div class="chat-avatar">${escapeHtml(getLeadInitials(lead.name))}</div>
+      <div style="min-width:0;flex:1;">
+        <div class="chat-item-name">${escapeHtml(limitText(lead.name || 'Lead sem nome', 80))}</div>
+        <div class="chat-item-preview">${escapeHtml(limitText(preview, 100))}</div>
+      </div>
+    </div>`;
+  }).join('') : '<div class="chat-empty">Nenhuma conversa encontrada.</div>';
+  const lead = activeChatLeadId ? getLeads().find(item => item.id === activeChatLeadId) : null;
+  if (!lead) {
+    header.innerHTML = '<div><div class="chat-header-title">Selecione uma conversa</div><div class="chat-header-meta">As mensagens aparecerão aqui.</div></div>';
+    thread.innerHTML = '<div class="chat-empty">Selecione um lead para ver a conversa.</div>';
+    if (input) input.disabled = true;
+    return;
+  }
+  if (input) input.disabled = false;
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  header.innerHTML = `<div>
+    <div class="chat-header-title">${escapeHtml(lead.name || 'Lead sem nome')}</div>
+    <div class="chat-header-meta">${escapeHtml(lead.phone || '')}${lead.act ? ' · ' + escapeHtml(CLIENT_NAMES[lead.act] || lead.act) : ''}</div>
+  </div>${phone ? `<button class="chat-open-wa" onclick="window.open('https://wa.me/${phone}','_blank')">Abrir WhatsApp</button>` : ''}`;
+  const messages = normalizeChatMessages(lead).slice().sort((a, b) => getChatMessageTime(a) - getChatMessageTime(b));
+  thread.innerHTML = messages.length ? messages.map(msg => {
+    const direction = msg.direction === 'out' ? 'out' : 'in';
+    return `<div class="chat-bubble ${direction}">${escapeHtml(msg.text || '')}<span class="chat-bubble-time">${escapeHtml(formatChatTime(msg.at || msg.createdAt || msg.timestamp))}</span></div>`;
+  }).join('') : '<div class="chat-empty">Ainda não há mensagens registradas para este lead.</div>';
+  thread.scrollTop = thread.scrollHeight;
+}
+
+function selectChatLead(id) {
+  activeChatLeadId = id;
+  renderChat();
+}
+
+function openLeadChat(id) {
+  activeChatLeadId = id;
+  switchView('chat');
+}
+
+async function sendWhatsAppMessageForLead(lead, message) {
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  if (!phone) throw new Error('Esse lead não tem telefone.');
+  return whatsappWorkerJson('/send', { method: 'POST', body: { act: lead.act, phone, message } });
+}
+
+async function sendChatMessage() {
+  const input = document.getElementById('chat-message-input');
+  const button = document.getElementById('chat-send-btn');
+  const lead = activeChatLeadId ? getLeads().find(item => item.id === activeChatLeadId) : null;
+  const message = String(input?.value || '').trim();
+  if (!lead) { showToast('Selecione uma conversa.', 'warning'); return; }
+  if (!message) return;
+  try {
+    if (button) button.disabled = true;
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'local_' + Date.now(), direction: 'out', text: message, at, source: 'crm' });
+    lead.lastWhatsAppMessage = message;
+    lead.lastWhatsAppMessageAt = at;
+    lead.updatedAt = at;
+    if (input) input.value = '';
+    await saveLeadToDb(lead);
+    renderChat();
+    showToast('Mensagem enviada.', 'success');
+  } catch(e) {
+    showToast('Erro ao enviar mensagem: ' + (e.message || e), 'warning');
+  } finally {
+    if (button) button.disabled = false;
+  }
+}
+
+async function sendFirstWhatsAppMessageAutomated(lead) {
+  if (!lead || lead.whatsappFirstMessageAt || lead.whatsappFirstMessageAutoErrorAt) return false;
+  const message = buildFirstWhatsAppMessage(lead);
+  try {
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    lead.whatsappFirstMessageAt = at;
+    lead.whatsappFirstMessageAuto = true;
+    lead.lastWhatsAppMessage = message;
+    lead.lastWhatsAppMessageAt = at;
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'auto_' + Date.now(), direction: 'out', text: message, at, source: 'auto-first-message' });
+    if (!lead.history) lead.history = [];
+    lead.history.push({ stage: '1ª mensagem automática enviada', at: new Date().toLocaleString('pt-BR') });
+    await saveLeadToDb(lead);
+    return true;
+  } catch(e) {
+    lead.whatsappFirstMessageAutoErrorAt = new Date().toISOString();
+    lead.whatsappFirstMessageAutoError = e.message || String(e);
+    await saveLeadToDb(lead).catch(() => {});
+    return false;
+  }
+}
+
+function maybeAutoSendFirstMessages(leads) {
+  (leads || []).forEach(lead => {
+    if (!lead || !lead.phone || lead.whatsappFirstMessageAt) return;
+    const stages = getStages(lead.act || (activeClient && activeClient.account) || '');
+    const firstStage = stages[0] && stages[0].id;
+    if (!firstStage || lead.stage !== firstStage) return;
+    sendFirstWhatsAppMessageAutomated(lead).then(sent => {
+      if (sent && typeof showToast === 'function') showToast('1ª mensagem automática enviada para ' + (lead.name || 'lead'), 'success');
+    });
+  });
+}
+
+window.createWhatsAppInstance = createWhatsAppInstance;
+window.subscribeWhatsAppInstance = subscribeWhatsAppInstance;
+window.refreshWhatsAppStatus = refreshWhatsAppStatus;
+window.loadWhatsAppQr = loadWhatsAppQr;
+window.renderChat = renderChat;
+window.selectChatLead = selectChatLead;
+window.openLeadChat = openLeadChat;
+window.sendChatMessage = sendChatMessage;
+
 function onCrmClientChange() {
   const sel = document.getElementById('crm-client-select');
   const act = sel.value;
@@ -3078,6 +3907,8 @@ function openSheetsIntegrationModal() {
   document.getElementById('sheets-script-output').value = '';
   modal.style.display = 'flex';
   modal.classList.add('open');
+  updateWhatsAppIntegrationPanel(act, { loading: true });
+  refreshWhatsAppStatus().catch(() => updateWhatsAppIntegrationPanel(act, { instanceText: 'Não configurada', sessionText: 'Pendente' }));
 }
 
 function closeSheetsIntegrationModal() {
@@ -3258,9 +4089,13 @@ function onCrmClientChange() {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
     CRM
   </div>
-  <div class="mobile-nav-item" id="mnav-integracoes" onclick="openIntegrationsFromNav(); setMobileNav('integracoes')">
+  <div class="mobile-nav-item" id="mnav-whatsapp" onclick="switchView('whatsapp'); setMobileNav('whatsapp')">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-    Integrações
+    WhatsApp
+  </div>
+  <div class="mobile-nav-item" id="mnav-chat" onclick="switchView('chat'); setMobileNav('chat')">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+    Chat
   </div>
   <div class="mobile-nav-item" id="mnav-conta" onclick="switchView('conta'); setMobileNav('conta')">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -3327,11 +4162,15 @@ function onCrmClientChange() {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           Conta
         </div>
-        <div class="nav-item" id="nav-integracoes" onclick="openIntegrationsFromNav()">
+        <div class="nav-item" id="nav-whatsapp" onclick="switchView('whatsapp')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          Integrações
+          WhatsApp
         </div>
-        <div class="nav-item" id="nav-contatos" onclick="if(window.abrirContatos) abrirContatos(); else switchView('contatos')">
+        <div class="nav-item" id="nav-chat" onclick="switchView('chat')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+          Chat
+        </div>
+        <div class="nav-item" id="nav-contatos" onclick="switchView('contatos')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
           Contatos
         </div>
@@ -3679,12 +4518,108 @@ function onCrmClientChange() {
 
     </div>
 
+    <!-- WhatsApp View -->
+    <div id="whatsapp-view" class="chat-view">
+      <h1>WhatsApp</h1>
+      <div class="chat-subtitle">Configuração da instância VZaps, assinatura, status e QR Code do cliente.</div>
+      <div class="whatsapp-card" style="margin-top:0;margin-bottom:18px;">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;">
+          <div style="min-width:260px;flex:1;">
+            <label class="modal-label">Cliente</label>
+            <select class="modal-select" id="whatsapp-client-select" onchange="onWhatsAppClientChange()" style="display:none;max-width:360px;">
+              <option value="">Selecione um cliente</option>
+            </select>
+            <div id="whatsapp-client-fixed" class="whatsapp-status-value" style="padding:10px 0;">-</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="whatsapp-action-btn" id="btn-whatsapp-create" onclick="createWhatsAppInstance()">Criar instância</button>
+            <button class="whatsapp-action-btn" id="btn-whatsapp-subscribe" onclick="subscribeWhatsAppInstance()">Assinar</button>
+            <button class="whatsapp-action-btn" id="btn-whatsapp-status" onclick="refreshWhatsAppStatus()">Status</button>
+            <button class="whatsapp-action-btn" id="btn-whatsapp-qr" onclick="loadWhatsAppQr()">QR Code</button>
+          </div>
+        </div>
+        <div class="whatsapp-status-grid">
+          <div class="whatsapp-status-box">
+            <div class="whatsapp-status-label">Cliente / ACT</div>
+            <div class="whatsapp-status-value" id="whatsapp-client-label">-</div>
+          </div>
+          <div class="whatsapp-status-box">
+            <div class="whatsapp-status-label">Instância</div>
+            <div class="whatsapp-status-value" id="whatsapp-instance-label">Não carregada</div>
+          </div>
+          <div class="whatsapp-status-box">
+            <div class="whatsapp-status-label">Sessão</div>
+            <div class="whatsapp-status-value" id="whatsapp-session-label">Pendente</div>
+          </div>
+        </div>
+        <div class="whatsapp-qr-wrap" id="whatsapp-qr-wrap">
+          <img id="whatsapp-qr-img" alt="QR Code WhatsApp">
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:10px;margin-top:14px;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);cursor:pointer;">
+          <input type="checkbox" id="whatsapp-auto-first-message" onchange="saveWhatsAppAutomationSetting()" style="margin-top:2px;accent-color:#25d366;">
+          <span>
+            <span style="display:block;font-size:13px;font-weight:700;color:var(--text);">Enviar 1ª mensagem automaticamente</span>
+            <span style="display:block;font-size:12px;color:var(--muted);margin-top:2px;">Quando um lead novo cair na primeira coluna do CRM deste cliente.</span>
+          </span>
+        </label>
+        <div class="whatsapp-log" id="whatsapp-log"></div>
+      </div>
+    </div>
+
+    <!-- Chat View -->
+    <div id="chat-view" class="chat-view">
+      <div class="chat-shell">
+        <aside class="chat-list-panel">
+          <div class="chat-search-wrap" style="display:flex;gap:8px;align-items:center;">
+            <input id="chat-search" class="chat-search" type="text" placeholder="Buscar conversa ou contato..." oninput="onChatSearch()">
+            <button onclick="openNewChat()" title="Nova conversa" style="flex-shrink:0;width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--accent2);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;">✎</button>
+          </div>
+          <div id="chat-tabs" style="display:flex;border-bottom:1px solid var(--border);">
+            <button onclick="setChatTab('vzaps')" id="tab-vzaps" style="flex:1;padding:8px;font-size:12px;font-weight:600;border:none;background:none;color:var(--accent2);border-bottom:2px solid var(--accent2);cursor:pointer;">WhatsApp</button>
+            <button onclick="setChatTab('crm')" id="tab-crm" style="flex:1;padding:8px;font-size:12px;font-weight:600;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;">CRM</button>
+          </div>
+          <div id="chat-list" class="chat-list"></div>
+          <div id="chat-list-status" style="font-size:11px;color:var(--muted);padding:6px 14px;text-align:center;"></div>
+          <div id="chat-connection-bar" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-top:1px solid var(--border);font-size:11px;">
+            <span id="chat-conn-dot" style="width:8px;height:8px;border-radius:50%;background:var(--muted);flex-shrink:0;"></span>
+            <span id="chat-conn-label" style="color:var(--muted);">Verificando conexão...</span>
+            <button onclick="checkChatConnectionStatus()" style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;padding:0;" title="Atualizar status">↻</button>
+          </div>
+        </aside>
+        <section class="chat-panel">
+          <div id="chat-header" class="chat-header">
+            <div>
+              <div class="chat-header-title">Selecione uma conversa</div>
+              <div class="chat-header-meta">As mensagens aparecerão aqui.</div>
+            </div>
+          </div>
+          <div id="chat-thread" class="chat-thread">
+            <div class="chat-empty">Selecione uma conversa para começar.</div>
+          </div>
+          <div class="chat-composer">
+            <textarea id="chat-message-input" placeholder="Digite uma mensagem..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMessage();}"></textarea>
+            <button id="chat-send-btn" class="chat-send-btn" onclick="sendChatMessage()">Enviar</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Modal novo chat -->
+      <div id="new-chat-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;width:420px;max-width:92vw;max-height:80vh;display:flex;flex-direction:column;gap:12px;">
+          <div style="font-size:15px;font-weight:600;color:var(--text);">Nova conversa</div>
+          <input id="new-chat-search" type="text" placeholder="Buscar contato do CRM ou digitar número..." oninput="renderNewChatContacts()" style="padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:13px;outline:none;width:100%;box-sizing:border-box;">
+          <div id="new-chat-contacts" style="overflow-y:auto;max-height:320px;display:flex;flex-direction:column;gap:4px;"></div>
+          <button onclick="closeNewChat()" style="padding:8px;border-radius:8px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-size:13px;">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Sheets Integration Modal -->
     <div class="modal-overlay stages-modal" id="sheets-integration-modal" style="display:none;">
       <div class="modal-box" style="max-width:760px; width:92vw;">
         <div class="modal-title">Integrações</div>
         <div style="font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:14px;">
-          Configure integrações do cliente. Nesta versão, gere o código da integração com Google Sheets.
+          Configure a integração do cliente com Google Sheets.
         </div>
         <div class="modal-field">
           <label class="modal-label">Cliente / ACT</label>
@@ -4016,6 +4951,8 @@ function onCrmClientChange() {
 <script>
 const STORAGE_KEY = 'meta_ads_clients_v2';
 const WORKER_URL = "https://meta-proxy.gabrieloliveira7043.workers.dev";
+const WHATSAPP_WORKER_URL = "https://huven-vzaps-whatsapp.gabrieloliveira7043.workers.dev";
+const WHATSAPP_WORKER_SECRET = "huven_whatsapp_2026";
 let activeClient = null;
 let isAdmin = false;
 
@@ -5912,11 +6849,17 @@ function applyAdrianaCampaignOrigem(lead, rawSheet) {
   lead.origem = `${social} - ${campaignLabel}`;
   return lead;
 }
+function normalizeLeadChatMessagesValue(value) {
+  if (Array.isArray(value)) return value.filter(Boolean);
+  if (!value || typeof value !== 'object') return [];
+  return Object.values(value).filter(Boolean);
+}
 function normalizeImportedLeadFields(lead) {
   if (!lead || typeof lead !== 'object') return lead;
   const normalized = { ...lead };
   normalized.act = normalizeLeadAccountId(normalized) || normalized.act;
   normalized.obs = normalized.obs || normalized.observacoes || normalized.observacao || normalized['observações'] || '';
+  normalized.chatMessages = normalizeLeadChatMessagesValue(normalized.chatMessages);
   const rawSheet = normalized.sheet && normalized.sheet.raw ? normalized.sheet.raw : {};
   const socialRaw = String(rawSheet.platform || rawSheet.plataforma || rawSheet.rede_social || normalized.platform || normalized.plataforma || normalized.rede_social || normalized.redeSocial || normalized.origem || '').trim();
   const social = socialRaw.toLowerCase();
@@ -6162,6 +7105,9 @@ function switchView(view) {
   }
   if (view === 'contatos') {
     if (!_leadsCache) { getLeadsAsync().then(() => renderContatos()); } else { renderContatos(); }
+  }
+  if (view === 'chat') {
+    if (!_leadsCache) { getLeadsAsync().then(() => renderChat()); } else { renderChat(); }
   }
   if (view === 'atendimento') {
     if (!_leadsCache) { getLeadsAsync().then(() => renderAtendimento()); } else { renderAtendimento(); }
@@ -6833,6 +7779,7 @@ function renderKanban() {
         <button class="card-btn del" onclick="deleteLead('${safeLeadId}')">✕</button>
       </div>`;
       cardHTML = cardHTML.replace(`openFirstWhatsAppMessage('${lead.id}')`, `openFirstWhatsAppMessage('${safeLeadId}')`);
+      cardHTML = cardHTML.replace(/onclick="window\.open\('https:\/\/wa\.me\/[^']+','_blank'\)"/, `onclick="openLeadChat('${safeLeadId}')"`);
       card.innerHTML = cardHTML;
       cardsDiv.appendChild(card);
     });
@@ -7093,7 +8040,7 @@ function buildFirstWhatsAppMessage(lead) {
     .replaceAll('{rede_social}', lead.redeSocial || 'Instagram')
     .replaceAll('{origem}', lead.origem || '');
 }
-function openFirstWhatsAppMessage(id) {
+async function openFirstWhatsAppMessage(id) {
   const leads = getLeads();
   const lead = leads.find(l => l.id === id);
   if (!lead) return;
@@ -7103,21 +8050,31 @@ function openFirstWhatsAppMessage(id) {
     return;
   }
   const message = buildFirstWhatsAppMessage(lead);
-  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
   const alreadySentFirstMessage = !!lead.whatsappFirstMessageAt;
-  if (!alreadySentFirstMessage) {
-    lead.whatsappFirstMessageAt = new Date().toISOString();
+  try {
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    if (!alreadySentFirstMessage) lead.whatsappFirstMessageAt = at;
+    lead.lastWhatsAppMessage = message;
+    lead.lastWhatsAppMessageAt = at;
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'first_' + Date.now(), direction: 'out', text: message, at, source: 'first-message-button' });
     if (!lead.history) lead.history = [];
     lead.history.push({ stage: '1ª mensagem enviada', at: new Date().toLocaleString('pt-BR') });
+    if (_leadsCache) {
+      const cacheIdx = _leadsCache.findIndex(l => l.id === id);
+      if (cacheIdx !== -1) _leadsCache[cacheIdx] = { ..._leadsCache[cacheIdx], ...lead };
+    }
+    await saveLeadToDb(lead);
+    renderKanban();
+    openLeadChat(id);
+    showToast('Primeira mensagem enviada.', 'success');
+  } catch(e) {
+    showToast('Erro ao enviar primeira mensagem: ' + (e.message || e), 'warning');
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   }
-  if (_leadsCache) {
-    const cacheIdx = _leadsCache.findIndex(l => l.id === id);
-    if (cacheIdx !== -1) _leadsCache[cacheIdx] = { ..._leadsCache[cacheIdx], ...lead };
-  }
-  saveLeadToDb(lead);
-  renderKanban();
-  window.open(url, '_blank');
 }
 window.openFirstWhatsAppMessage = openFirstWhatsAppMessage;
 
@@ -7188,7 +8145,7 @@ function moveLeadTo(id, stageId) {
 
 
 function setMobileNav(view) {
-  ['report','crm','conta','integracoes','cfg'].forEach(v => {
+  ['report','crm','conta','whatsapp','chat','cfg'].forEach(v => {
     const el = document.getElementById('mnav-' + v);
     if (el) el.classList.toggle('active', v === view);
   });
@@ -7547,6 +8504,7 @@ function processLeadNotificationSnapshot(leads) {
     if (typeof renderFunilChart === 'function') renderFunilChart();
     if (typeof renderFunilEvolucao === 'function') renderFunilEvolucao();
     notifyNewLeadArrival(newLeads);
+    if (typeof maybeAutoSendFirstMessages === 'function') maybeAutoSendFirstMessages(newLeads);
   }
 }
 
@@ -7562,6 +8520,8 @@ function startLeadRealtimeListener() {
         if (typeof renderFunilChart === 'function') renderFunilChart();
         if (typeof renderFunilEvolucao === 'function') renderFunilEvolucao();
       }
+      const chatView = document.getElementById('chat-view');
+      if (chatView && chatView.style.display !== 'none' && typeof renderChat === 'function') renderChat();
     });
     return true;
   } catch(e) {
@@ -8024,6 +8984,633 @@ function onCrmClientChange() {
   getLeadsAsync().then(() => { renderKanban(); renderFunilChart(); renderFunilEvolucao(); });
 }
 
+let activeChatLeadId = null;
+
+function currentWhatsAppAct() {
+  const sel = document.getElementById('whatsapp-client-select');
+  const whatsappView = document.getElementById('whatsapp-view');
+  const isWhatsAppVisible = whatsappView && whatsappView.style.display !== 'none';
+  if (isAdmin && isWhatsAppVisible && sel && sel.value) return sel.value;
+  return activeClient && activeClient.account ? activeClient.account : getCurrentCrmActForSheets();
+}
+function normalizeWhatsAppClientText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+function resolveKnownClientAct(value) {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  const acts = Object.keys(CLIENT_NAMES || {});
+  if (acts.includes(raw)) return raw;
+  if (/^\d{8,}$/.test(raw)) {
+    const normalized = 'act_' + raw;
+    if (acts.includes(normalized)) return normalized;
+  }
+  if (/^act[_\s-]*/i.test(raw)) {
+    const normalized = typeof normalizeActValue === 'function' ? normalizeActValue(raw) : raw;
+    if (acts.includes(normalized)) return normalized;
+  }
+  const wanted = normalizeWhatsAppClientText(raw);
+  const match = acts.find(act => normalizeWhatsAppClientText(CLIENT_NAMES[act]) === wanted);
+  return match || '';
+}
+function resolveLeadWhatsAppAct(lead) {
+  const rawSheet = lead && lead.sheet && lead.sheet.raw ? lead.sheet.raw : {};
+  const candidates = [
+    lead && lead.act,
+    lead && lead.account,
+    lead && lead.accountId,
+    lead && lead.account_id,
+    lead && lead.conta,
+    lead && lead.cliente,
+    lead && lead.client,
+    rawSheet.act,
+    rawSheet.account,
+    rawSheet.accountId,
+    rawSheet.account_id,
+    rawSheet.conta,
+    rawSheet.cliente,
+    rawSheet.client
+  ];
+  for (const value of candidates) {
+    const act = resolveKnownClientAct(value);
+    if (act) return act;
+  }
+  const crmAct = getCurrentCrmActForSheets();
+  const resolvedCrmAct = resolveKnownClientAct(crmAct);
+  if (resolvedCrmAct) return resolvedCrmAct;
+  return resolveKnownClientAct(currentWhatsAppAct());
+}
+function leadIsInFirstCrmStage(lead, act, firstStage) {
+  if (!lead || !firstStage) return false;
+  if (!lead.stage) {
+    lead.stage = firstStage;
+    return true;
+  }
+  const normalizedStage = typeof normalizeLeadStageForClient === 'function'
+    ? normalizeLeadStageForClient(lead, act)
+    : String(lead.stage || '').trim();
+  const current = typeof normalizeStageTextForMatch === 'function'
+    ? normalizeStageTextForMatch(normalizedStage)
+    : String(normalizedStage || '').toLowerCase().trim();
+  const firstId = typeof normalizeStageTextForMatch === 'function'
+    ? normalizeStageTextForMatch(firstStage.id || firstStage)
+    : String(firstStage.id || firstStage || '').toLowerCase().trim();
+  const firstLabel = typeof normalizeStageTextForMatch === 'function'
+    ? normalizeStageTextForMatch(firstStage.label || '')
+    : String(firstStage.label || '').toLowerCase().trim();
+  return current === firstId || (!!firstLabel && current === firstLabel);
+}
+function setupWhatsAppPage() {
+  const sel = document.getElementById('whatsapp-client-select');
+  const fixed = document.getElementById('whatsapp-client-fixed');
+  const qrWrap = document.getElementById('whatsapp-qr-wrap');
+  const qrImg = document.getElementById('whatsapp-qr-img');
+  const qrBtn = document.getElementById('btn-whatsapp-qr');
+  if (qrImg) { qrImg.removeAttribute('src'); qrImg.style.display = 'none'; }
+  if (qrWrap) { qrWrap.style.display = 'none'; qrWrap.textContent = ''; if (qrImg) qrWrap.appendChild(qrImg); }
+  if (qrBtn) qrBtn.textContent = 'QR Code';
+  const acts = Object.keys(CLIENT_NAMES || {});
+  if (isAdmin && sel) {
+    sel.style.display = 'block';
+    if (fixed) fixed.style.display = 'none';
+    const previous = sel.value || (crmClientFilter && crmClientFilter !== 'all' ? crmClientFilter : '') || (activeClient && activeClient.account) || acts[0] || '';
+    sel.innerHTML = acts.map(act => `<option value="${escapeHtml(act)}">${escapeHtml(CLIENT_NAMES[act] || act)} | ${escapeHtml(act)}</option>`).join('');
+    if (previous && acts.includes(previous)) sel.value = previous;
+  } else {
+    if (sel) sel.style.display = 'none';
+    if (fixed) {
+      const act = currentWhatsAppAct();
+      fixed.style.display = 'block';
+      fixed.textContent = act ? `${CLIENT_NAMES[act] || (activeClient && activeClient.name) || 'Cliente'} | ${act}` : '-';
+    }
+  }
+  const act = currentWhatsAppAct();
+  loadWhatsAppAutomationSetting(act);
+  updateWhatsAppIntegrationPanel(act, { loading: true });
+  refreshWhatsAppStatus().catch(() => updateWhatsAppIntegrationPanel(act, { instanceText: 'Não configurada', sessionText: 'Pendente' }));
+}
+function onWhatsAppClientChange() {
+  activeChatLeadId = null;
+  setupWhatsAppPage();
+  renderChat();
+}
+function whatsappAutomationKey(act) {
+  return 'huven_whatsapp_auto_first_message_' + (act || '');
+}
+function isWhatsAppAutomationEnabled(act) {
+  try { return localStorage.getItem(whatsappAutomationKey(act)) === '1'; } catch(e) { return false; }
+}
+function loadWhatsAppAutomationSetting(act) {
+  const input = document.getElementById('whatsapp-auto-first-message');
+  if (input) input.checked = !!act && isWhatsAppAutomationEnabled(act);
+}
+function saveWhatsAppAutomationSetting() {
+  const act = currentWhatsAppAct();
+  const input = document.getElementById('whatsapp-auto-first-message');
+  if (!act || !input) return;
+  try { localStorage.setItem(whatsappAutomationKey(act), input.checked ? '1' : '0'); } catch(e) {}
+  showToast(input.checked ? 'Automação de 1ª mensagem ativada.' : 'Automação de 1ª mensagem desativada.', 'success');
+}
+function whatsappHeaders() { return { 'Content-Type': 'application/json', 'x-huven-secret': WHATSAPP_WORKER_SECRET }; }
+function setWhatsAppLog(message) { const el = document.getElementById('whatsapp-log'); if (el) el.textContent = message || ''; }
+function updateWhatsAppIntegrationPanel(act, state = {}) {
+  const clientName = CLIENT_NAMES[act] || (activeClient ? activeClient.name : '') || act || '-';
+  const clientEl = document.getElementById('whatsapp-client-label');
+  const instanceEl = document.getElementById('whatsapp-instance-label');
+  const sessionEl = document.getElementById('whatsapp-session-label');
+  if (clientEl) clientEl.textContent = clientName ? `${clientName} | ${act || '-'}` : '-';
+  if (instanceEl) instanceEl.textContent = state.instanceText || (state.loading ? 'Carregando...' : instanceEl.textContent || 'Não carregada');
+  if (sessionEl) sessionEl.textContent = state.sessionText || (state.loading ? 'Carregando...' : sessionEl.textContent || 'Pendente');
+}
+async function whatsappWorkerJson(path, options = {}) {
+  const res = await fetch(`${WHATSAPP_WORKER_URL}${path}`, {
+    method: options.method || 'GET',
+    headers: whatsappHeaders(),
+    body: options.body ? JSON.stringify(options.body) : undefined
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || data.ok === false) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
+}
+async function createWhatsAppInstance() {
+  const act = currentWhatsAppAct();
+  if (!act) { showToast('Selecione um cliente para criar a instância.', 'warning'); return; }
+  const btn = document.getElementById('btn-whatsapp-create');
+  try {
+    if (btn) btn.disabled = true;
+    setWhatsAppLog('Criando ou reaproveitando instância...');
+    const data = await whatsappWorkerJson('/instances/create', { method: 'POST', body: { act, name: CLIENT_NAMES[act] || act } });
+    updateWhatsAppIntegrationPanel(act, { instanceText: data.instance?.id || 'Instância criada', sessionText: data.instance?.connected ? 'Conectada' : 'Aguardando conexão' });
+    const webhookMsg = data.webhook?.error ? ` Webhook: ${data.webhook.error}` : (data.reused ? ' Webhook atualizado.' : '');
+    setWhatsAppLog((data.reused ? 'Instância existente reaproveitada.' : 'Instância criada. Assine e depois conecte pelo QR Code.') + webhookMsg);
+    showToast('Instância WhatsApp pronta.', 'success');
+  } catch(e) { setWhatsAppLog(e.message || String(e)); showToast('Erro na instância: ' + (e.message || e), 'warning'); }
+  finally { if (btn) btn.disabled = false; }
+}
+async function subscribeWhatsAppInstance() {
+  const act = currentWhatsAppAct();
+  if (!act) { showToast('Selecione um cliente.', 'warning'); return; }
+  const btn = document.getElementById('btn-whatsapp-subscribe');
+  try {
+    if (btn) btn.disabled = true;
+    setWhatsAppLog('Solicitando assinatura da instância...');
+    const data = await whatsappWorkerJson('/instances/subscribe', { method: 'POST', body: { act } });
+    setWhatsAppLog('Assinatura solicitada. ' + (data.data?.url ? `URL: ${data.data.url}` : 'Modo direto confirmado pela VZaps.'));
+    showToast('Assinatura solicitada.', 'success');
+    await refreshWhatsAppStatus();
+  } catch(e) { setWhatsAppLog(e.message || String(e)); showToast('Erro ao assinar: ' + (e.message || e), 'warning'); }
+  finally { if (btn) btn.disabled = false; }
+}
+async function refreshWhatsAppStatus() {
+  const act = currentWhatsAppAct();
+  if (!act) return;
+  const data = await whatsappWorkerJson(`/instances/status?act=${encodeURIComponent(act)}`);
+  const status = data.data || {};
+  const sessionTextRaw = String(findDeepValue(status, ['status', 'state', 'connection', 'session', 'sessionStatus', 'whatsappStatus']) || '').trim();
+  const connected = !!(data.connected || data.instance?.connected || findDeepValue(status, ['connected', 'isConnected', 'is_connected', 'authenticated', 'isAuthenticated']) || /(connected|conectado|open|online|ready|authenticated|logged)/i.test(sessionTextRaw) || findDeepValue(status, ['phone', 'Phone', 'whatsapp_phone', 'whatsapp', 'number', 'jid']));
+  updateWhatsAppIntegrationPanel(act, { instanceText: data.instance?.id || 'Instância configurada', sessionText: connected ? 'Conectada' : (sessionTextRaw || 'Aguardando conexão') });
+  setWhatsAppLog('Status atualizado.');
+}
+function findDeepValue(value, keys) {
+  if (!value || typeof value !== 'object') return '';
+  const stack = [value];
+  const seen = new Set();
+  while (stack.length) {
+    const item = stack.shift();
+    if (!item || typeof item !== 'object' || seen.has(item)) continue;
+    seen.add(item);
+    for (const key of keys) {
+      const candidate = item[key];
+      if (candidate !== undefined && candidate !== null && String(candidate).trim()) return candidate;
+    }
+    Object.values(item).forEach(child => { if (child && typeof child === 'object') stack.push(child); });
+  }
+  return '';
+}
+function normalizeWhatsAppQrValue(value) {
+  const raw = String(value || '').trim();
+  if (!raw || /^(200|true|false|null|undefined)$/i.test(raw)) return '';
+  if (/^data:image\//i.test(raw) || /^https?:\/\//i.test(raw)) return raw;
+  if (/^[A-Za-z0-9+/=]+$/.test(raw) && raw.length > 120) return 'data:image/png;base64,' + raw;
+  return raw;
+}
+async function loadWhatsAppQr() {
+  const act = currentWhatsAppAct();
+  if (!act) { showToast('Selecione um cliente.', 'warning'); return; }
+  const btn = document.getElementById('btn-whatsapp-qr');
+  try {
+    if (btn) btn.disabled = true;
+    setWhatsAppLog('Buscando QR Code...');
+    const data = await whatsappWorkerJson(`/instances/qr?act=${encodeURIComponent(act)}`);
+    const qr = normalizeWhatsAppQrValue(data.qr || data.qrCode || data.data?.qr_code || data.data?.qrCode || data.data?.qrcode || data.data?.qr || data.data?.base64 || data.data?.image || data.data?.url || '');
+    const wrap = document.getElementById('whatsapp-qr-wrap');
+    const img = document.getElementById('whatsapp-qr-img');
+    if (!qr) {
+      if (img) img.style.display = 'none';
+      if (wrap) {
+        wrap.style.display = 'block';
+        wrap.style.background = 'var(--surface2)';
+        wrap.style.color = 'var(--text)';
+        wrap.style.whiteSpace = 'pre-wrap';
+        wrap.textContent = data.connected ? 'Esta instância já está conectada.' : (data.hint || 'A VZaps não retornou QR Code nesta chamada.');
+      }
+      setWhatsAppLog(data.hint || 'A VZaps não retornou QR Code nesta chamada.');
+      return;
+    }
+    if (/^https?:\/\//i.test(String(qr)) || /^data:image\//i.test(String(qr))) {
+      if (img) { img.style.display = 'block'; img.src = qr; }
+      if (wrap) { wrap.textContent = ''; wrap.appendChild(img); wrap.style.display = 'block'; }
+      setWhatsAppLog('QR Code carregado.');
+      if (btn) btn.textContent = 'Gerar outro';
+    } else {
+      if (img) img.style.display = 'none';
+      if (wrap) {
+        wrap.style.display = 'block';
+        wrap.style.background = 'var(--surface2)';
+        wrap.style.color = 'var(--text)';
+        wrap.style.whiteSpace = 'pre-wrap';
+        wrap.textContent = String(qr);
+      }
+      setWhatsAppLog('A VZaps retornou o código do QR em texto. Copie ou tente novamente em alguns segundos.');
+    }
+  } catch(e) { setWhatsAppLog(e.message || String(e)); showToast('Erro ao carregar QR: ' + (e.message || e), 'warning'); }
+  finally { if (btn) btn.disabled = false; }
+}
+function normalizeChatMessages(lead) { return normalizeLeadChatMessagesValue(lead && lead.chatMessages); }
+function getChatMessageTime(msg) { const value = msg && (msg.at || msg.createdAt || msg.timestamp || msg.date); const date = value ? new Date(value) : null; return date && !isNaN(date.getTime()) ? date.getTime() : 0; }
+function getLeadInitials(name) { const words = String(name || 'Lead').trim().split(/\s+/).filter(Boolean); return words.slice(0, 2).map(word => word[0]).join('').toUpperCase() || 'L'; }
+function getChatLeads(query = '') {
+  const act = currentWhatsAppAct();
+  const normalizedQuery = String(query || '').toLowerCase().trim();
+  const allClientLeads = getLeads().filter(lead => !act || leadMatchesClient(lead, act));
+  const conversations = allClientLeads.filter(lead => normalizeChatMessages(lead).length || lead.lastWhatsAppMessage || lead.whatsappChatSource);
+  let leads = conversations;
+  if (normalizedQuery) {
+    const contacts = allClientLeads.filter(lead => {
+      const haystack = [lead.name, lead.phone, lead.email, lead.lastWhatsAppMessage, CLIENT_NAMES[lead.act]]
+        .map(value => String(value || '').toLowerCase())
+        .join(' ');
+      return haystack.includes(normalizedQuery);
+    });
+    const byId = new Map();
+    [...conversations, ...contacts].forEach(lead => byId.set(lead.id, lead));
+    leads = Array.from(byId.values());
+  }
+  return leads.sort((a, b) => {
+    const ta = Math.max(getLeadCrmSortTime(a), getChatMessageTime({ at: a.lastWhatsAppMessageAt }), ...normalizeChatMessages(a).map(getChatMessageTime));
+    const tb = Math.max(getLeadCrmSortTime(b), getChatMessageTime({ at: b.lastWhatsAppMessageAt }), ...normalizeChatMessages(b).map(getChatMessageTime));
+    return tb - ta;
+  });
+}
+function formatChatTime(value) { const date = value ? new Date(value) : null; return date && !isNaN(date.getTime()) ? date.toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : ''; }
+function renderChat() {
+  const list = document.getElementById('chat-list'), header = document.getElementById('chat-header'), thread = document.getElementById('chat-thread'), input = document.getElementById('chat-message-input');
+  if (!list || !header || !thread) return;
+  const query = String(document.getElementById('chat-search')?.value || '').toLowerCase().trim();
+  let leads = getChatLeads(query);
+  if (!activeChatLeadId && leads.length) activeChatLeadId = leads[0].id;
+  if (activeChatLeadId && !leads.some(lead => lead.id === activeChatLeadId)) activeChatLeadId = leads.length ? leads[0].id : null;
+  list.innerHTML = leads.length ? leads.map(lead => {
+    const messages = normalizeChatMessages(lead).slice().sort((a, b) => getChatMessageTime(a) - getChatMessageTime(b));
+    const last = messages[messages.length - 1];
+    const preview = (last && last.text) || lead.lastWhatsAppMessage || (messages.length ? lead.obs : 'Contato do CRM') || lead.phone || '';
+    const active = lead.id === activeChatLeadId ? ' active' : '';
+    return `<div class="chat-item${active}" onclick="selectChatLead('${escapeJsString(lead.id)}')"><div class="chat-avatar">${escapeHtml(getLeadInitials(lead.name))}</div><div style="min-width:0;flex:1;"><div class="chat-item-name">${escapeHtml(limitText(lead.name || 'Lead sem nome', 80))}</div><div class="chat-item-preview">${escapeHtml(limitText(preview, 100))}</div></div></div>`;
+  }).join('') : `<div class="chat-empty">${query ? 'Nenhuma conversa ou contato encontrado.' : 'Nenhuma conversa encontrada.'}</div>`;
+  const lead = activeChatLeadId ? getLeads().find(item => item.id === activeChatLeadId) : null;
+  if (!lead) { header.innerHTML = '<div><div class="chat-header-title">Selecione uma conversa</div><div class="chat-header-meta">As mensagens aparecerão aqui.</div></div>'; thread.innerHTML = '<div class="chat-empty">Selecione um lead para ver a conversa.</div>'; if (input) input.disabled = true; return; }
+  if (input) input.disabled = false;
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  header.innerHTML = `<div><div class="chat-header-title">${escapeHtml(lead.name || 'Lead sem nome')}</div><div class="chat-header-meta">${escapeHtml(lead.phone || '')}${lead.act ? ' · ' + escapeHtml(CLIENT_NAMES[lead.act] || lead.act) : ''}</div></div>`;
+  const messages = normalizeChatMessages(lead).slice().sort((a, b) => getChatMessageTime(a) - getChatMessageTime(b));
+  thread.innerHTML = messages.length ? messages.map(msg => `<div class="chat-bubble ${msg.direction === 'out' ? 'out' : 'in'}">${escapeHtml(msg.text || '')}<span class="chat-bubble-time">${escapeHtml(formatChatTime(msg.at || msg.createdAt || msg.timestamp))}</span></div>`).join('') : '<div class="chat-empty">Contato do CRM. Envie uma mensagem para iniciar a conversa pela instância conectada.</div>';
+  thread.scrollTop = thread.scrollHeight;
+}
+function selectChatLead(id) { activeChatLeadId = id; renderChat(); }
+function openLeadChat(id) { activeChatLeadId = id; switchView('chat'); }
+async function sendWhatsAppMessageForLead(lead, message) {
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  if (!phone) throw new Error('Esse lead não tem telefone.');
+  const act = resolveLeadWhatsAppAct(lead);
+  if (!act) throw new Error('Cliente/ACT não identificado para envio.');
+  lead.act = act;
+  return whatsappWorkerJson('/send', { method: 'POST', body: { act, phone, message } });
+}
+async function diagnoseWhatsAppLead(lead) {
+  const phone = normalizeWhatsAppPhone(lead && lead.phone || '');
+  const act = resolveLeadWhatsAppAct(lead || {});
+  if (!act) return null;
+  try {
+    return await whatsappWorkerJson('/diagnose', { method: 'POST', body: { act, phone } });
+  } catch(e) {
+    return { ok: false, error: e.message || String(e), phone, warnings: [e.message || String(e)] };
+  }
+}
+function summarizeWhatsAppDiagnosis(diag) {
+  if (!diag) return '';
+  const parts = [];
+  if (diag.version) parts.push('Worker: ' + diag.version);
+  if (diag.phone) parts.push('Telefone: ' + diag.phone);
+  if (diag.instance?.id) parts.push('Instância: ' + diag.instance.id);
+  if (diag.instance?.billing_status) parts.push('Billing: ' + diag.instance.billing_status);
+  parts.push('Sessão: ' + (diag.connected ? 'conectada' : 'não conectada'));
+  const users = diag.phoneCheck?.data?.users || diag.phoneCheck?.users || [];
+  if (Array.isArray(users) && users.length) {
+    const user = users[0] || {};
+    const exists = user.exists ?? user.isOnWhatsApp ?? user.valid ?? user.isWhatsapp;
+    if (exists !== undefined) parts.push('Telefone no WhatsApp: ' + (exists ? 'sim' : 'não'));
+    if (user.jid) parts.push('JID: ' + user.jid);
+  }
+  if (Array.isArray(diag.warnings) && diag.warnings.length) parts.push('Avisos: ' + diag.warnings.join(' | '));
+  if (diag.error) parts.push('Diagnóstico: ' + diag.error);
+  return parts.join('\n');
+}
+async function sendChatMessage() {
+  const input = document.getElementById('chat-message-input'), button = document.getElementById('chat-send-btn');
+  const lead = activeChatLeadId ? getLeads().find(item => item.id === activeChatLeadId) : null;
+  const message = String(input?.value || '').trim();
+  if (!lead) { showToast('Selecione uma conversa.', 'warning'); return; }
+  if (!message) return;
+  try {
+    if (button) button.disabled = true;
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'local_' + Date.now(), direction: 'out', text: message, at, source: 'crm' });
+    lead.lastWhatsAppMessage = message; lead.lastWhatsAppMessageAt = at; lead.updatedAt = at;
+    if (input) input.value = '';
+    await saveLeadToDb(lead); renderChat(); showToast('Mensagem enviada.', 'success');
+  } catch(e) { showToast('Erro ao enviar mensagem: ' + (e.message || e), 'warning'); }
+  finally { if (button) button.disabled = false; }
+}
+async function sendFirstWhatsAppMessageAutomated(lead) {
+  if (!lead || lead.whatsappFirstMessageAt || lead._sendingFirstWhatsAppMessage) return false;
+  const automationKey = getWhatsAppFirstMessageLockKey(lead);
+  if (automationKey && _whatsappFirstMessageLocks.has(automationKey)) return false;
+  if (automationKey) _whatsappFirstMessageLocks.add(automationKey);
+  lead._sendingFirstWhatsAppMessage = true;
+  const message = buildFirstWhatsAppMessage(lead);
+  try {
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    lead.whatsappFirstMessageAt = at; lead.whatsappFirstMessageAuto = true; lead.lastWhatsAppMessage = message; lead.lastWhatsAppMessageAt = at;
+    delete lead.whatsappFirstMessageAutoErrorAt;
+    delete lead.whatsappFirstMessageAutoError;
+    delete lead._sendingFirstWhatsAppMessage;
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'auto_' + Date.now(), direction: 'out', text: message, at, source: 'auto-first-message' });
+    if (!lead.history) lead.history = [];
+    lead.history.push({ stage: '1ª mensagem automática enviada', at: new Date().toLocaleString('pt-BR') });
+    await saveLeadToDb(lead); return true;
+  } catch(e) {
+    delete lead._sendingFirstWhatsAppMessage;
+    lead.whatsappFirstMessageAutoErrorAt = new Date().toISOString();
+    lead.whatsappFirstMessageAutoError = e.message || String(e);
+    await saveLeadToDb(lead).catch(() => {});
+    const diag = await diagnoseWhatsAppLead(lead);
+    const diagText = summarizeWhatsAppDiagnosis(diag);
+    if (diagText) setWhatsAppLog('Erro na 1ª mensagem automática: ' + (e.message || e) + '\n\nDiagnóstico:\n' + diagText);
+    if (typeof showToast === 'function') showToast('Erro na 1ª mensagem automática: ' + (e.message || e), 'warning');
+    return false;
+  } finally {
+    if (automationKey) setTimeout(() => _whatsappFirstMessageLocks.delete(automationKey), 15000);
+  }
+}
+const _whatsappFirstMessageLocks = new Set();
+function getWhatsAppFirstMessageLockKey(lead) {
+  if (!lead) return '';
+  const act = resolveLeadWhatsAppAct(lead) || lead.act || '';
+  const phone = normalizeWhatsAppPhone(lead.phone || '');
+  const id = getLeadUniqueKey(lead) || lead.id || '';
+  return [act, phone, id].filter(Boolean).join('|');
+}
+function maybeAutoSendFirstMessages(leads) {
+  (leads || []).forEach(lead => {
+    if (!lead || !lead.phone || lead.whatsappFirstMessageAt) return;
+    const act = resolveLeadWhatsAppAct(lead);
+    if (!act || !isWhatsAppAutomationEnabled(act)) return;
+    lead.act = act;
+    const stages = getStages(act);
+    const firstStage = stages[0];
+    if (!firstStage || !leadIsInFirstCrmStage(lead, act, firstStage)) return;
+    const automationKey = getWhatsAppFirstMessageLockKey(lead);
+    if (automationKey && _whatsappFirstMessageLocks.has(automationKey)) return;
+    sendFirstWhatsAppMessageAutomated(lead).then(sent => { if (sent && typeof showToast === 'function') showToast('1ª mensagem automática enviada para ' + (lead.name || 'lead'), 'success'); });
+  });
+}
+let _whatsappAutomationPrimed = false;
+let _knownWhatsAppAutomationLeadKeys = new Set();
+function processWhatsAppAutomationSnapshot(leads) {
+  const list = Array.isArray(leads) ? leads : [];
+  const nextKeys = new Set(list.map(getLeadUniqueKey).filter(Boolean));
+  if (!_whatsappAutomationPrimed) {
+    _knownWhatsAppAutomationLeadKeys = nextKeys;
+    _whatsappAutomationPrimed = true;
+    return;
+  }
+  const newLeads = list.filter(lead => {
+    const key = getLeadUniqueKey(lead);
+    return key && !_knownWhatsAppAutomationLeadKeys.has(key);
+  });
+  _knownWhatsAppAutomationLeadKeys = nextKeys;
+  if (newLeads.length) maybeAutoSendFirstMessages(newLeads);
+}
+if (typeof processLeadNotificationSnapshot === 'function') {
+  const _huvenOriginalProcessLeadNotificationSnapshot = processLeadNotificationSnapshot;
+  processLeadNotificationSnapshot = function processLeadNotificationSnapshotWithWhatsAppAutomation(leads) {
+    try { processWhatsAppAutomationSnapshot(leads); } catch(e) { console.warn('WhatsApp automation snapshot error:', e); }
+    return _huvenOriginalProcessLeadNotificationSnapshot(leads);
+  };
+}
+const _huvenOriginalSaveLeadToDb = saveLeadToDb;
+saveLeadToDb = async function saveLeadToDbWithWhatsAppAutomation(lead) {
+  const result = await _huvenOriginalSaveLeadToDb(lead);
+  try {
+    if (lead && !lead.whatsappFirstMessageAt && !lead._sendingFirstWhatsAppMessage) {
+      scheduleWhatsAppAutomationForLead(lead);
+    }
+  } catch(e) {}
+  return result;
+};
+function scheduleWhatsAppAutomationForLead(lead) {
+  if (!lead || lead.whatsappFirstMessageAt) return;
+  [250, 1500, 4000].forEach(delay => {
+    setTimeout(() => {
+      try {
+        if (!lead.whatsappFirstMessageAt) maybeAutoSendFirstMessages([lead]);
+      } catch(e) {}
+    }, delay);
+  });
+}
+if (typeof renderKanban === 'function') {
+  const _huvenOriginalRenderKanbanForWhatsApp = renderKanban;
+  renderKanban = function renderKanbanWithWhatsAppAutomation(...args) {
+    const result = _huvenOriginalRenderKanbanForWhatsApp.apply(this, args);
+    setTimeout(() => {
+      try {
+        const act = crmClientFilter && crmClientFilter !== 'all' ? crmClientFilter : currentWhatsAppAct();
+        runWhatsAppAutomationForAct(act);
+      } catch(e) {}
+    }, 500);
+    return result;
+  };
+}
+function switchView(view) {
+  ['report','crm','conta','contatos','whatsapp','chat'].forEach(v => {
+    const el = document.getElementById('nav-' + v);
+    if (el) el.classList.toggle('active', v === view);
+  });
+  const topbar = document.querySelector('.topbar');
+  const content = document.querySelector('.content');
+  if (topbar) topbar.style.display = view === 'report' ? 'flex' : 'none';
+  if (content) content.style.display = view === 'report' ? 'block' : 'none';
+  const crmView = document.getElementById('crm-view');
+  const contaView = document.getElementById('conta-view');
+  const contView = document.getElementById('contatos-view');
+  const whatsappView = document.getElementById('whatsapp-view');
+  const chatView = document.getElementById('chat-view');
+  [crmView, contaView, contView, whatsappView, chatView].forEach(el => { if (el) el.style.display = 'none'; });
+  if (crmView) crmView.style.display = view === 'crm' ? 'block' : 'none';
+  if (contaView) contaView.style.display = view === 'conta' ? 'block' : 'none';
+  if (contView) contView.style.display = view === 'contatos' ? 'block' : 'none';
+  if (whatsappView) whatsappView.style.display = view === 'whatsapp' ? 'block' : 'none';
+  if (chatView) chatView.style.display = view === 'chat' ? 'block' : 'none';
+  if (view === 'crm') getLeadsAsync().then(() => { renderKanban(); renderFunilChart(); renderFunilEvolucao(); runWhatsAppAutomationForAct(crmClientFilter && crmClientFilter !== 'all' ? crmClientFilter : currentWhatsAppAct()); });
+  if (view === 'contatos') { if (!_leadsCache) getLeadsAsync().then(() => renderContatos()); else renderContatos(); }
+  if (view === 'whatsapp') {
+    setupWhatsAppPage();
+  }
+  if (view === 'chat') {
+    stopChatPolling();
+    if (!_leadsCache) {
+      getLeadsAsync().then(() => {
+        loadVzapsChats();
+        startChatPolling();
+        checkChatConnectionStatus();
+      });
+    } else {
+      loadVzapsChats();
+      startChatPolling();
+      checkChatConnectionStatus();
+    }
+  } else {
+    stopChatPolling();
+  }
+  if (view === 'conta') {
+    document.getElementById('pw-current').value = '';
+    document.getElementById('pw-new').value = '';
+    document.getElementById('pw-confirm').value = '';
+    document.getElementById('pw-error').style.display = 'none';
+    document.getElementById('pw-success').style.display = 'none';
+    if (isAdmin) renderAdminLogins();
+  }
+}
+window.abrirContatos = function abrirContatos() {
+  switchView('contatos');
+};
+function refreshActiveClientViewsAfterSelect(act) {
+  const crmView = document.getElementById('crm-view');
+  const contView = document.getElementById('contatos-view');
+  const whatsappView = document.getElementById('whatsapp-view');
+  const chatView = document.getElementById('chat-view');
+  const whatsappSel = document.getElementById('whatsapp-client-select');
+  if (whatsappSel && Array.from(whatsappSel.options || []).some(opt => opt.value === act)) whatsappSel.value = act;
+  activeChatLeadId = null;
+  if (crmView && crmView.style.display !== 'none') {
+    getLeadsAsync().then(() => { renderKanban(); renderFunilChart(); renderFunilEvolucao(); runWhatsAppAutomationForAct(act); });
+  } else if (contView && contView.style.display !== 'none') {
+    getLeadsAsync().then(() => { renderContatos(); runWhatsAppAutomationForAct(act); });
+  } else if (whatsappView && whatsappView.style.display !== 'none') {
+    setupWhatsAppPage();
+    getLeadsAsync().then(() => runWhatsAppAutomationForAct(act));
+  } else if (chatView && chatView.style.display !== 'none') {
+    getLeadsAsync().then(() => { renderChat(); runWhatsAppAutomationForAct(act); });
+  } else {
+    getLeadsAsync().then(() => runWhatsAppAutomationForAct(act));
+  }
+}
+function runWhatsAppAutomationForAct(act) {
+  if (!act || !isWhatsAppAutomationEnabled(act)) return;
+  const leads = getLeads().filter(lead => leadMatchesClient(lead, act));
+  maybeAutoSendFirstMessages(leads);
+}
+window.selectClientByAct = function selectClientByActFixed(act) {
+  const resolvedAct = resolveKnownClientAct(act);
+  if (!resolvedAct) {
+    showToast('Cliente sem ACT válido para WhatsApp/CRM.', 'warning');
+    return;
+  }
+  const name = getClientDisplayName(resolvedAct);
+  activeClient = { name, account: resolvedAct };
+  crmClientFilter = resolvedAct;
+  const pageTitle = document.getElementById('page-title');
+  const pageMeta = document.getElementById('page-meta');
+  const welcome = document.getElementById('welcome-state');
+  if (pageTitle) pageTitle.textContent = name;
+  if (pageMeta) pageMeta.textContent = resolvedAct;
+  if (welcome) welcome.style.display = 'none';
+  const crmSel = document.getElementById('crm-client-select');
+  if (crmSel) crmSel.value = resolvedAct;
+  const mobileSel = document.getElementById('mobile-client-select');
+  if (mobileSel) mobileSel.value = resolvedAct;
+  const camposBtn = document.getElementById('btn-cfg-campos');
+  if (camposBtn) camposBtn.style.display = isAdmin ? 'inline-flex' : 'none';
+  const limparBtn = document.getElementById('btn-limpar-crm');
+  if (limparBtn) limparBtn.style.display = isAdmin ? 'inline-flex' : 'none';
+  renderSidebar();
+  updateMobileHeader();
+  refreshActiveClientViewsAfterSelect(resolvedAct);
+};
+window.openFirstWhatsAppMessage = async function openFirstWhatsAppMessage(id) {
+  const leads = getLeads();
+  const lead = leads.find(l => String(l.id) === String(id));
+  if (!lead) { showToast('Lead não encontrado para enviar a mensagem.', 'warning'); return; }
+  const phone = normalizeWhatsAppPhone(lead.phone);
+  if (!phone) { showToast('Esse lead ainda não tem telefone cadastrado.', 'warning'); return; }
+  const message = buildFirstWhatsAppMessage(lead);
+  const alreadySentFirstMessage = !!lead.whatsappFirstMessageAt;
+  try {
+    setWhatsAppLog('Enviando 1ª mensagem para ' + (lead.name || 'lead') + '...');
+    await sendWhatsAppMessageForLead(lead, message);
+    const at = new Date().toISOString();
+    if (!alreadySentFirstMessage) lead.whatsappFirstMessageAt = at;
+    lead.lastWhatsAppMessage = message;
+    lead.lastWhatsAppMessageAt = at;
+    if (!Array.isArray(lead.chatMessages)) lead.chatMessages = [];
+    lead.chatMessages.push({ id: 'first_' + Date.now(), direction: 'out', text: message, at, source: 'first-message-button' });
+    if (!lead.history) lead.history = [];
+    lead.history.push({ stage: '1ª mensagem enviada', at: new Date().toLocaleString('pt-BR') });
+    await _huvenOriginalSaveLeadToDb(lead);
+    renderKanban();
+    openLeadChat(id);
+    setWhatsAppLog('1ª mensagem enviada para ' + (lead.name || 'lead') + '.');
+    showToast('Primeira mensagem enviada.', 'success');
+  } catch(e) {
+    const errorText = e.message || String(e);
+    lead.whatsappFirstMessageAutoErrorAt = new Date().toISOString();
+    lead.whatsappFirstMessageAutoError = errorText;
+    await _huvenOriginalSaveLeadToDb(lead).catch(() => {});
+    const diag = await diagnoseWhatsAppLead(lead);
+    const diagText = summarizeWhatsAppDiagnosis(diag);
+    setWhatsAppLog('Erro ao enviar 1ª mensagem: ' + errorText + (diagText ? '\n\nDiagnóstico:\n' + diagText : ''));
+    showToast('Erro ao enviar primeira mensagem: ' + errorText, 'warning');
+  }
+};
+window.createWhatsAppInstance = createWhatsAppInstance;
+window.subscribeWhatsAppInstance = subscribeWhatsAppInstance;
+window.refreshWhatsAppStatus = refreshWhatsAppStatus;
+window.loadWhatsAppQr = loadWhatsAppQr;
+window.onWhatsAppClientChange = onWhatsAppClientChange;
+window.saveWhatsAppAutomationSetting = saveWhatsAppAutomationSetting;
+window.renderChat = renderChat;
+window.selectChatLead = selectChatLead;
+window.openLeadChat = openLeadChat;
+window.sendChatMessage = sendChatMessage;
 </script>
 </body>
 </html>
